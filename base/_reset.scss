@@ -1,5 +1,5 @@
 ﻿//base reset for screen and mobile.if $type is SC,mixin return screen reset.if $type is MB,mixin return mobile reset.
-@mixin ex-reset($type){
+@mixin es-reset($type){
   @if $type == SC{
     html{ color:#000; background:#FFF; }
     body,

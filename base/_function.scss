@@ -2,13 +2,13 @@
 @import "var";
 
 //page width
-@mixin ex-container($page-width : $ex-container-width){
+@mixin es-container($page-width : $es-container-width){
   width:$page-width;
   margin:0 auto;
 }
 
 //float, fix IE6 bug
-@mixin ex-float($position : left,$hack : IE6){
+@mixin es-float($position : left,$hack : IE6){
   @if $position == none {
     float:none;
   }
@@ -22,8 +22,8 @@
   }
 }
 
-//clear, @include ex-clear(fix);
-@mixin ex-clear($way : both){
+//clear, @include es-clear(fix);
+@mixin es-clear($way : both){
   @if $way == fix{
     *zoom:1;
     display:block;
@@ -47,74 +47,74 @@
   }
 }
 //cross browser inline-block
-@mixin ex-inline-block(){
+@mixin es-inline-block(){
  display:inline-block;
  display:-moz-inline-stack;
  *display:inline; zoom:1;
 }
 
 //CSS3 Utilities
-@mixin ex-cross-browser($property, $value, $official: true, $moz: $ex-support-for-mozilla, $webkit: $ex-support-for-webkit, $o: $ex-support-for-opera, $ms: $ex-support-for-microsoft, $khtml: $ex-support-for-khtml) {
+@mixin es-cross-browser($property, $value, $official: true, $moz: $es-support-for-mozilla, $webkit: $es-support-for-webkit, $o: $es-support-for-opera, $ms: $es-support-for-microsoft, $khtml: $es-support-for-khtml) {
   @if $official {
     #{$property}: $value; }
-  @if $moz and $ex-support-for-mozilla {
+  @if $moz and $es-support-for-mozilla {
     -moz-#{$property}: $value; }
-  @if $webkit and $ex-support-for-webkit {
+  @if $webkit and $es-support-for-webkit {
     -webkit-#{$property}: $value; }
-  @if $o and $ex-support-for-opera {
+  @if $o and $es-support-for-opera {
     -o-#{$property}: $value; }
-  @if $ms and $ex-support-for-microsoft {
+  @if $ms and $es-support-for-microsoft {
     -ms-#{$property}: $value; }
-  @if $khtml and $ex-support-for-khtml {
+  @if $khtml and $es-support-for-khtml {
     -khtml-#{$property}: $value; }
 }
 
-//CSS3 border radius. ex-border-radius(5px) ,ex-border-radius(5px 6px ,5px 4px)
-@mixin ex-border-radius($radius: $default-border-radius, $vertical-radius: false){
+//CSS3 border radius. es-border-radius(5px) ,es-border-radius(5px 6px ,5px 4px)
+@mixin es-border-radius($radius: $default-border-radius, $vertical-radius: false){
   @if $vertical-radius {
-    @include ex-cross-browser(border-radius, first-value-of($radius) first-value-of($vertical-radius), not -moz, -webkit, not -o, not -ms, not -khtml, not official);
-    @include ex-cross-browser("border-radius", $radius unquote("/") $vertical-radius, -moz, not -webkit, -o, -ms, -khtml, official);
+    @include es-cross-browser(border-radius, first-value-of($radius) first-value-of($vertical-radius), not -moz, -webkit, not -o, not -ms, not -khtml, not official);
+    @include es-cross-browser("border-radius", $radius unquote("/") $vertical-radius, -moz, not -webkit, -o, -ms, -khtml, official);
   }
   @else {
-    @include ex-cross-browser(border-radius, $radius);
+    @include es-cross-browser(border-radius, $radius);
   }
 }
 
-//CSS3 box shadow. ex-border-radius(5px) ,ex-border-radius(5px 6px ,5px 4px)
-@mixin ex-box-shadow($shadow-1: default, $shadow-2: false, $shadow-3: false, $shadow-4: false, $shadow-5: false, $shadow-6: false, $shadow-7: false, $shadow-8: false, $shadow-9: false, $shadow-10: false) {
+//CSS3 box shadow. es-border-radius(5px) ,es-border-radius(5px 6px ,5px 4px)
+@mixin es-box-shadow($shadow-1: default, $shadow-2: false, $shadow-3: false, $shadow-4: false, $shadow-5: false, $shadow-6: false, $shadow-7: false, $shadow-8: false, $shadow-9: false, $shadow-10: false) {
   // This has to be on a single line due to a bug in the scss parser: https://github.com/nex3/sass/issues/issue/26
   $legacy: type-of($shadow-1) == color and type-of(if($shadow-2, $shadow-2, 0)) == number and type-of(if($shadow-3, $shadow-3, 0)) == number and type-of(if($shadow-4, $shadow-4, 0)) == number and type-of(if($shadow-5, $shadow-5, 0)) == number and ($shadow-6 == inset or type-of($shadow-6) == bool) and ($shadow-2 or $shadow-3 or $shadow-4 or $shadow-5 or $shadow-6);
   @if $legacy {
     @warn "Passing separate arguments for a single shadow to box-shadow is deprecated. " + "Pass the values as a single space-separated list, or use the single-box-shadow mixin. " + "See http://beta.compass-style.org/help/tutorials/upgrading/antares/ for more info.";
-    @include ex-single-box-shadow(if($shadow-1, $shadow-1, $default-box-shadow-color), if($shadow-2, $shadow-2, $default-box-shadow-h-offset), if($shadow-3, $shadow-3, $default-box-shadow-v-offset), if($shadow-4, $shadow-4, $default-box-shadow-blur), if($shadow-5, $shadow-5, $default-box-shadow-spread), if($shadow-6, $shadow-6, $default-box-shadow-inset)); }
+    @include es-single-box-shadow(if($shadow-1, $shadow-1, $default-box-shadow-color), if($shadow-2, $shadow-2, $default-box-shadow-h-offset), if($shadow-3, $shadow-3, $default-box-shadow-v-offset), if($shadow-4, $shadow-4, $default-box-shadow-blur), if($shadow-5, $shadow-5, $default-box-shadow-spread), if($shadow-6, $shadow-6, $default-box-shadow-inset)); }
   @else {
     @if $shadow-1 == default {
       $shadow-1: -compass-space-list(compact(if($default-box-shadow-inset, inset, false), $default-box-shadow-h-offset, $default-box-shadow-v-offset, $default-box-shadow-blur, $default-box-shadow-spread, $default-box-shadow-color)); }
     $shadow: compact($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10);
-    @include ex-cross-browser(box-shadow, $shadow, -moz, -webkit, -o, not -ms, not -khtml, official); }
+    @include es-cross-browser(box-shadow, $shadow, -moz, -webkit, -o, not -ms, not -khtml, official); }
   }
 
-@mixin ex-background-image($image-1, $image-2: false, $image-3: false, $image-4: false, $image-5: false, $image-6: false, $image-7: false, $image-8: false, $image-9: false, $image-10: false) {
+@mixin es-background-image($image-1, $image-2: false, $image-3: false, $image-4: false, $image-5: false, $image-6: false, $image-7: false, $image-8: false, $image-9: false, $image-10: false) {
   $images: compact($image-1, $image-2, $image-3, $image-4, $image-5, $image-6, $image-7, $image-8, $image-9, $image-10);
   $add-pie-bg: prefixed(-pie, $images) or -compass-list-size($images) > 1;
-  @if $ex-support-for-svg and prefixed(-svg, $images) {
+  @if $es-support-for-svg and prefixed(-svg, $images) {
     background-image: -svg($images);
     background-size: 100%; }
-  @if $ex-support-for-original-webkit-gradients and prefixed(-owg, $images) {
+  @if $es-support-for-original-webkit-gradients and prefixed(-owg, $images) {
     background-image: -owg($images); }
-  @if $ex-support-for-webkit and prefixed(-webkit, $images) {
+  @if $es-support-for-webkit and prefixed(-webkit, $images) {
     background-image: -webkit($images); }
-  @if $ex-support-for-mozilla and prefixed(-moz, $images) {
+  @if $es-support-for-mozilla and prefixed(-moz, $images) {
     background-image: -moz($images); }
-  @if $ex-support-for-opera and prefixed(-o, $images) {
+  @if $es-support-for-opera and prefixed(-o, $images) {
     background-image: -o($images); }
-  @if $ex-support-for-microsoft and prefixed(-ms, $images) {
+  @if $es-support-for-microsoft and prefixed(-ms, $images) {
     background-image: -ms($images); }
-  @if $ex-support-for-pie and $add-pie-bg {
+  @if $es-support-for-pie and $add-pie-bg {
     @warn "PIE does not support background-image. Use @include background(#{$images}) instead."; }
   background-image: $images; }
 
-@mixin ex-linear-gradient($color-stops, $start: false, $image: false) {
+@mixin es-linear-gradient($color-stops, $start: false, $image: false) {
   @if $image {
     @if $start {
       @warn "The linear-gradient mixin is deprecated. Instead use: @include background-image(#{$image}, linear-gradient(#{$start}, #{$color-stops}))";
@@ -132,11 +132,11 @@
   @if not $start {
     $start: top;
   }
-  @include ex-background-image($image, linear-gradient($start, $color-stops));
+  @include es-background-image($image, linear-gradient($start, $color-stops));
 }
 
 //set opacity
-@mixin ex-opacity($value){
+@mixin es-opacity($value){
   filter:alpha(opacity=($value * 100));
   -moz-opacity:$value;
   -khtml-opacity:$value;
@@ -144,41 +144,41 @@
 }
 //inline box
 
-@mixin ex-inline-box($class,$own : false){
+@mixin es-inline-box($class,$own : false){
 /*<ul>
     <li class="list"></li>
     <li class="list"></li>
     <li class="list"></li>
 </ul>
 ul{
-  @include ex-inline-box(list);
+  @include es-inline-box(list);
 }
 .list{
-  @include ex-inline-box(list,true);
+  @include es-inline-box(list,true);
 }
 */
   @if $own {
-    @include ex-float(left);
-    @include ex-clear(fix);
+    @include es-float(left);
+    @include es-clear(fix);
   }
   @else{
     .#{$class}{
-      @include ex-float(left);
+      @include es-float(left);
     }
-    @include ex-clear(fix);
+    @include es-clear(fix);
   }
 }
 
 //isometric (横向排列dom等距)
-//@include ex-isometric(500px,5);
-@mixin ex-isometric($width,$NO,$padding-top: 0px,$padding-right: 0px,$padding-bottom: 0px,$padding-left: 0px,$margin-top: 0px,$margin-right: 0px,$margin-bottom: 0px,$margin-left: 0px){
+//@include es-isometric(500px,5);
+@mixin es-isometric($width,$NO,$padding-top: 0px,$padding-right: 0px,$padding-bottom: 0px,$padding-left: 0px,$margin-top: 0px,$margin-right: 0px,$margin-bottom: 0px,$margin-left: 0px){
     width:$width / $NO - $padding-left - $padding-right - $margin-left - $margin-right;
     padding:$padding-top $padding-right $padding-bottom $padding-left;
     margin:$margin-top $margin-right $margin-bottom $margin-left;
 }
 
 //hr
-@mixin ex-hr($color,$width: 1px,$left-color : #FFFFFF,$right-color : #FFFFFF, $top-color : #FFFFFF){
+@mixin es-hr($color,$width: 1px,$left-color : #FFFFFF,$right-color : #FFFFFF, $top-color : #FFFFFF){
   border-bottom:$width solid $color;
   border-left:1px solid $left-color;
   border-right:1px solid $right-color;
@@ -189,7 +189,7 @@ ul{
 }
 
 //overflow
-@mixin ex-overflow($axis: all,$way: hidden){
+@mixin es-overflow($axis: all,$way: hidden){
   @if $axis == all{
     overflow:$way;
   }@else{
@@ -198,7 +198,7 @@ ul{
 }
 
 //height = line-height
-@mixin ex-height($height,$line-height:true,$hack-height:false,$hack-line-height:false,$type:'_'){
+@mixin es-height($height,$line-height:true,$hack-height:false,$hack-line-height:false,$type:'_'){
   @if $line-height != false and $line-height != true{
     height:$height;
     line-height:$line-height;
@@ -216,7 +216,7 @@ ul{
   }
 }
 
-@mixin ex-background($value){
+@mixin es-background($value){
   @if type_of($value) == color{
     background-color:unquote($value);
   }@else{
@@ -224,7 +224,7 @@ ul{
   }
 }
 
-@mixin ex-border($value){
+@mixin es-border($value){
   @if type_of($value) == color{
     border-color: unquote($value);
   }@else{
@@ -232,7 +232,7 @@ ul{
   }
 }
 
-@mixin ex-font($value){
+@mixin es-font($value){
   @if type_of($value) == color{
     color: unquote($value);
   }@else{
@@ -240,7 +240,7 @@ ul{
   }
 }
 // box
-@mixin ex-box($width,$height : false){
+@mixin es-box($width,$height : false){
   @if $height != false{
     width:$width;
     height:$height;
@@ -253,7 +253,7 @@ ul{
 @mixin text-overflow($width : 100%,$height : false,$line-height : true){
   width:$width;
   @if $height != false{
-    @include ex-height($height,$line-height);
+    @include es-height($height,$line-height);
   }
   overflow:hidden;
   text-overflow:ellipsis;
