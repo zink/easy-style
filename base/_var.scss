@@ -1,0 +1,52 @@
+﻿//exbase初始化变量文件，此为初始化全局变量，请不要在此文件中给变量赋值，如需修改请在项目scss文件中覆盖
+
+//页面总宽
+$ex-container-width : 960px;
+
+//跨浏览器初始化,定义是否进行跨浏览器支持
+$ex-support-for-mozilla   : true;  //FireFox
+$ex-support-for-original-webkit-gradients : true;
+$ex-support-for-webkit    : true;  //Webkit
+$ex-support-for-opera     : true;  //Opera
+$ex-support-for-microsoft : true;  //IE
+$ex-support-for-khtml     : true;  //other use khtml
+$ex-support-for-svg       : false; //svg
+$ex-support-for-pie       : false; //css3 pie
+
+//border radius默认值
+$default-border-radius    : 3px;
+
+//box shadow默认值
+$default-box-shadow-color    : #CCCCCC;
+$default-box-shadow-h-offset : 0px;
+$default-box-shadow-v-offset : 0px;
+$default-box-shadow-blur     : 5px;
+$default-box-shadow-spread   : false;
+$default-box-shadow-inset    : false;
+
+//色彩值
+$c0 : #000000;
+$c1 : #111111;
+$c2 : #222222;
+$c3 : #333333;
+$c4 : #444444;
+$c5 : #555555;
+$c6 : #666666;
+$c7 : #777777;
+$c8 : #888888;
+$c9 : #999999;
+$ca : #AAAAAA;
+$cb : #BBBBBB;
+$cc : #CCCCCC;
+$cd : #DDDDDD;
+$ce : #EEEEEE;
+$cf : #FFFFFF;
+//以下为简写的三位，请各位补充
+$f60 : #FF6600;
+$ff9 : #FFFF99;
+$f90 : #FF9900;
+$f00 : #FF0000;
+$_69c : #6699CC;
+$ffc : #FFFFCC;
+$f30 : #FF3300;
+$_7b0 : #77BB00;

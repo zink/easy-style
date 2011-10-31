@@ -1,0 +1,27 @@
+// Dissolve
+
+#emb .dissolve.in {
+    -webkit-animation-name: dissolveIn;
+}
+
+#emb .dissolve.out {
+    -webkit-animation-name: dissolveOut;
+}
+
+@-webkit-keyframes dissolveIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes dissolveOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

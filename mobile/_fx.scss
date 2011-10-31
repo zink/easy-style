@@ -1,0 +1,94 @@
+a {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+}
+
+#emb {
+  -webkit-text-size-adjust: none;
+  -webkit-user-select: none;
+  bottom: 0;
+  font-family: "Helvetica Neue", Helvetica;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  .selectable,
+  input,
+  textarea {
+    -webkit-user-select: auto;
+  }
+  &.notransform {
+    -webkit-transform: none !important;
+  }
+}
+
+
+
+#emb > * {
+    -webkit-box-sizing: border-box;
+    display: none;
+    left: 0;
+    min-height: 100%;
+    overflow-x: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+}
+
+#emb > .current {
+    display: block !important;
+    z-index: 10;
+}
+
+#emb .in, #emb .out {
+    -webkit-animation-duration: 250ms;
+    -webkit-animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+#emb .in {
+    z-index: 10;
+}
+
+#emb .out {
+    z-index: 0 !important;
+}
+
+#emb.supports3d {
+    -webkit-perspective: 800;
+    -webkit-transform-style: preserve-3d;
+}
+
+#emb.supports3d > * {
+    -webkit-transform: translate3d(0,0,0) rotate(0) scale(1);
+}
+// Fade
+@import "fx/fade";
+// Dissolve
+@import "fx/dissolve";
+// Pop 
+@import "fx/pop";
+// Slide Left
+@import "fx/slide_left";
+// Slide Right
+@import "fx/slide_right";
+// Slide Up
+@import "fx/slide_up";
+// Slide Down
+@import "fx/slide_down";
+// Flip Left
+@import "fx/flip_left";
+// Flip Right
+@import "fx/flip_right";
+// Swap Right
+@import "fx/swap_right";
+// Swap Left
+@import "fx/swap_left";
+// Cube Left
+@import "fx/cube_left";
+// Cube Right
+@import "fx/cube_right";

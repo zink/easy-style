@@ -1,0 +1,29 @@
+#emb .flipright {
+    -webkit-backface-visibility: hidden;
+}
+
+#emb .flipright.in {
+    -webkit-animation-name: flipRightIn;
+}
+
+#emb .flipright.out {
+    -webkit-animation-name: flipRightOut;
+}
+
+@-webkit-keyframes flipRightIn {
+    0% {
+        -webkit-transform: rotateY(-180deg) scale(.8);
+    }
+    100% {
+        -webkit-transform: rotateY(0deg) scale(1);
+    }
+}
+
+@-webkit-keyframes flipRightOut {
+    0% {
+        -webkit-transform: rotateY(0deg) scale(1);
+    }
+    100% {
+        -webkit-transform: rotateY(180deg) scale(.8);
+    }
+}

@@ -1,0 +1,4 @@
+//mobile reset
+@mixin reset(){
+  @include ex-reset(MB);
+}
