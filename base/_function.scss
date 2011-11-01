@@ -1,12 +1,6 @@
 ﻿//load exbase var exbase
 @import "var";
 
-//page width
-@mixin es-container($page-width : $es-container-width){
-  width:$page-width;
-  margin:0 auto;
-}
-
 //float, fix IE6 bug
 @mixin es-float($position : left,$hack : IE6){
   @if $position == none {
@@ -21,7 +15,6 @@
     *display:inline;
   }
 }
-
 //clear, @include es-clear(fix);
 @mixin es-clear($way : both){
   @if $way == fix{
@@ -46,10 +39,40 @@
     clear:both;
   }
 }
+//page width
+@mixin es-container($page-width : $es-container-width,$center : true){
+  width:$page-width;
+  @if $center{
+    margin:0 auto;
+  }
+}
+//layout
+@mixin es-lsidebar($width,$margin_left : 0,$sidebar_class : lsidebar,$content_class : main){
+  @include es-clear(fix);
+  .#{$sidebar_class}{
+    width:$width;
+    @include es-float;
+  }
+  .#{$content_class}{
+    margin-left:$width + $margin_left;
+  }
+}
+
+@mixin es-rsidebar($width,$margin_right : 0,$sidebar_class : rsidebar,$content_class : main){
+  @include es-clear(fix);
+  .#{$sidebar_class}{
+    width:$width;
+    @include es-float(right);
+  }
+  .#{$content_class}{
+    margin-right:$width + $margin_right;
+  }
+}
+
+
 //cross browser inline-block
 @mixin es-inline-block(){
  display:inline-block;
- display:-moz-inline-stack;
  *display:inline; zoom:1;
 }
 
@@ -224,14 +247,56 @@ ul{
   }
 }
 
-@mixin es-border($value){
-  @if type_of($value) == color{
-    border-color: unquote($value);
+@mixin es-box-center($width,$height,$position : center){
+  @if $position == center{
+    position:absolute;
+    width:$width;
+    height:$height;
+    top:50%;
+    left:50%;
+    margin-top:-$height/2;
+    margin-left:-$width/2;
   }@else{
-    border:unquote($value);
+    position:absolute;
+    width:$width;
+    height:$height;
+    top:$position;
+    left:50%;
+    margin-left:-$width/2;
   }
 }
 
+//border
+@mixin es-border($width : 1px,$style: solid,$color: #ccc,$border: all){
+  @if type_of($width) == color{
+    border-color: unquote($value);
+  }@else{
+    @if $border == all{
+      border:$width $style $color;
+    }
+    @if $border == top or $border == right or $border == bottom or $border == left{
+      border-#{$border}:$width $style $color;
+    }
+    @if $border == untop{
+      border:$width $style $color;
+      border-top:none;
+    }
+    @if $border == unright{
+      border:$width $style $color;
+      border-right:none;
+    }
+    @if $border == unbottom{
+      border:$width $style $color;
+      border-bottom:none;
+    }
+    @if $border == unleft{
+      border:$width $style $color;
+      border-left:none;
+    }
+  }
+}
+
+//font
 @mixin es-font($value){
   @if type_of($value) == color{
     color: unquote($value);
@@ -239,6 +304,7 @@ ul{
     font: unquote($value);
   }
 }
+
 // box
 @mixin es-box($width,$height : false){
   @if $height != false{
