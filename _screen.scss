@@ -2,5 +2,5 @@
 @import "base/reset";
 //screen reset
 @mixin reset(){
-  @include ex-reset(SC);
+  @include es-reset(SC);
 }

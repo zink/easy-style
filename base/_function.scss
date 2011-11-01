@@ -136,10 +136,10 @@
 }
 
 //set opacity
-@mixin es-opacity($value){
-  filter:alpha(opacity=($value * 100));
-  -moz-opacity:$value;
-  -khtml-opacity:$value;
+@mixin es-opacity($value,$ie : false,$type){
+  @if $ie and $type == SC{
+    filter: unquote("progid:DXImageTransform.Microsoft.Alpha(Opacity=#{round($opacity * 100)})");
+  }
   opacity:$value;
 }
 //inline box
