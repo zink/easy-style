@@ -1,6 +1,6 @@
 @import "base/function";
 @import "base/reset";
 //screen reset
-@mixin reset(){
+@mixin sc-reset(){
   @include es-reset(SC);
 }

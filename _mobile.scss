@@ -1,4 +1,6 @@
 @import "base/function";
 @import "base/reset";
-@import "mobile/reset";
 @import "mobile/fx";
+@mixin mb-reset(){
+  @include es-reset(MB);
+}
