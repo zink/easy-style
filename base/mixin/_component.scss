@@ -1,0 +1,153 @@
+﻿@import "utilities";
+
+//@descrip: 组件mixin，与模块或JS组件相关
+
+//= isometric (横向排列dom等距)
+//= @param: $width:容器宽度;
+//= @param: $n:几列;
+//= @param: padding及margin;
+@mixin isometric($width,$n:1,$padding-top: 0,$padding-right: 0,$padding-bottom: 0,$padding-left: 0,$margin-top: 0,$margin-right: 0,$margin-bottom: 0,$margin-left: 0){
+    width:$width / $n - $padding-left - $padding-right - $margin-left - $margin-right;
+    $padding:null;
+    $margin:null;
+    @if $padding-top == $padding-right == $padding-bottom == $padding-left or ($padding-top == $padding-right and not $padding-bottom){
+        $padding: $padding-top;
+    }@else if $padding-top == $padding-right and $padding-bottom == $padding-left {
+        $padding: $padding-top $padding-bottom;
+    }@else {
+        $padding: $padding-top $padding-right $padding-bottom $padding-left;
+    }
+    padding: $padding;
+    @if $margin-top == $margin-right == $margin-bottom == $margin-left or ($margin-top == $margin-right and not $margin-bottom){
+        $margin: $margin-top;
+    }@else if $margin-top == $margin-right and $margin-bottom == $margin-left {
+        $margin: $margin-top $margin-bottom;
+    }@else {
+        $margin:$margin-top $margin-right $margin-bottom $margin-left;
+    }
+    margin: $margin;
+}
+
+//= 横向排列的块元素
+//= @param: $class:生成类名;
+//= 例：<ul><li class="list"></li><li class="list"></li><li class="list"></li></ul>
+@mixin inline-box($class:false){
+    @if $class{
+        .#{$class}{
+          	@include float(left);
+        }
+        @include clear(fix);
+    }
+    @else {
+        @include float(left);
+        @include clear(fix);
+    }
+}
+
+//= css3 horizontal box
+@mixin horizontal-box($child-class: $default-item-class, $moz: false){
+    display:box;
+    @if fix(webkit) {
+        display:-webkit(box);
+    }
+    @if $moz and fix(ff) {
+        display:-moz(box);
+    }
+    @include cross-browser(box-orient, horizontal, $moz:$moz, $o:false);
+    .#{$child-class}{
+        display:block;
+        @include cross-browser(box-flex, 1, $moz:$moz, $o:false);
+    }
+}
+
+//= 未知高度图片垂直居中:ie6+,FF,safari,chrome;!doctype html;
+//= 例：<div><a><img></a></div>
+@mixin img-middle($width:$default-width, $height:true, $border:$default-border-color, $margin:false, $background:false){
+  @if $height==true {
+    $height: $width;
+  }
+  $fontsize:$height*0.9;
+  @include box($width,$height,$height - 2px,true,$border,$background, false, false, false, $height, '*');
+  text-align:center;
+  @content;
+  @if fix(7){
+      *font-size:$fontsize;font-family:Arial;
+  }
+  @if $margin {
+    @include margin($margin);
+  }
+  // *> &{font-size:$def-fontsize;}
+  img{@include img-size($width,$height,true,true);}
+}
+
+//= 生成各方向的三角箭头
+//= @param: $direct:all/left/right/top/bottom;
+@mixin arrow($direct: all, $size:5px, $border:$default-border-width $default-border-color $default-border-style, $bg:$gf, $offset: 0, $class: arrow) {
+    $d:'';
+    $box:$size * 2;
+    $width: 0;
+    $style: $default-border-style;
+    $color: null;
+    $border: border-value($border);
+    @if $border {
+        $width: n($border, 1);
+        $style: nth($border, 2);
+        $color: n($border, 3);
+    }
+    .#{$class}{
+        position: absolute;overflow: hidden;font-size:0;line-height:0;width: $box;height: $box;
+        i{position: absolute;width:0;height:0;overflow:hidden;border:$size dashed transparent;}
+    }
+    $direct: if($direct == all, left right top bottom, $direct);
+    @each $v in $direct {
+        $d: if($v == left or $v == right, top, left);
+        $oppo: opposite-position($v);
+        .#{$class}-#{$v}{
+            #{nth($d,1)}:$offset; #{$v}:-$box;
+            i{border-#{$oppo}-style:$style;}
+            @if $width and $color and $width > 0 {
+                .below{border-#{$oppo}-color:$color; #{$v}:-$width;}
+            }
+            @if typeof($bg) == color {
+                $pos: sqrt(pow($width,2)*2) - $width;
+                .above{border-#{$oppo}-color:$bg; #{$v}: if(unit($pos) == 'px', floor($pos), $pos);}
+            }
+        }
+    }
+}
+
+//= 生成向左的三角箭头
+@mixin arrow-left($size:5px, $border:$default-border-width $default-border-color $default-border-style, $bg:$gf, $offset:0, $class: arrow) {
+    @include arrow(left, $size, $border, $bg, $offset, $class);
+}
+
+//= 生成向右的三角箭头
+@mixin arrow-right($size:5px, $border:$default-border-width $default-border-color $default-border-style, $bg:$gf, $offset:0, $class: arrow) {
+    @include arrow(right, $size, $border, $bg, $offset, $class);
+}
+
+//= 生成向上的三角箭头
+@mixin arrow-top($size:5px, $border:$default-border-width $default-border-color $default-border-style, $bg:$gf, $offset:0, $class: arrow) {
+    @include arrow(top, $size, $border, $bg, $offset, $class);
+}
+
+//= 生成向下的三角箭头
+@mixin arrow-bottom($size:5px, $border:$default-border-width $default-border-color $default-border-style, $bg:$gf, $offset:0, $class: arrow) {
+    @include arrow(bottom, $size, $border, $bg, $offset, $class);
+}
+
+//= 弹出层的基本属性，如果属性不够用可以@include popup(params){propery:xxx;}包含其它css属性组合甚至include 其它mixin
+@mixin popup($z-index:false,$bg:$gf, $border:false, $width:false, $padding:false, $display:false){
+	@include rect($width, $padding:$padding, $border:$border,$background:$bg,$display:$display, $position: absolute, $z-index: $z-index);
+    @content;
+    &:focus{outline:0 none;}
+}
+
+//= 带箭头的弹出层，如果属性不够用可以@include popup-arrow(params){propery:xxx;}包含其它css属性组合甚至include 其它mixin
+@mixin popup-arrow($z-index: false, $bg:$gf, $border:false, $width:false, $direct: all, $arrow-size:5px, $offset:0) {
+	@include popup($z-index, $bg, $border, $width){
+        @content;
+    };
+    @include arrow($direct, $arrow-size, $border, $bg, $offset);
+}
+

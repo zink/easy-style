@@ -1,0 +1,49 @@
+﻿@import "utilities";
+
+//@descrip: grid 栅格化相关
+
+//= 栅格化页面宽度
+@mixin grid-container(){
+    @include container($default-container-width, 0 auto);
+}
+//=last grid
+@mixin grid-last($direct:left){
+    @include list-one(false, $direct);
+}
+//= grid border
+@mixin grid-border($border-color: $default-border-color, $border-width: $default-border-width) {
+    padding-right: $default-grid-margin / 2 - $border-width;
+    margin-right: $default-grid-margin / 2;
+    border-right: $border-width $default-border-style $border-color;
+}
+
+//= grid colborder
+@mixin grid-colborder($border-color: $default-border-color, $border-width: $default-border-width) {
+    padding-right: floor(($default-grid-width + 2 * $default-grid-margin - $border-width) / 2);
+    margin-right: ceil(($default-grid-width + 2 * $default-grid-margin - $border-width) / 2);
+    border-right: $border-width $default-border-style $border-color;
+}
+
+//= base columns
+@mixin base-column($last: false){
+    @include float(left);
+    @if $last{
+        @include grid-last;
+    }@else{
+        margin-right:$default-grid-margin;
+    }
+}
+
+//= columns
+@mixin column($n,$last: false){
+    @include base-column($last);
+    width: span($n);
+}
+
+//= columns border
+@mixin column-border($n,$border-color: $default-border-color, $border-width: $default-border-width){
+    @include float(left);
+    @include grid-border($border-color,$border-width);
+    width: span($n);
+}
+

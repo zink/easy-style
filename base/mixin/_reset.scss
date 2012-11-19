@@ -1,0 +1,59 @@
+﻿@import "../function";
+
+//@descrip: css reset，分别返回pc端或移动端的reset属性
+
+@mixin reset(){
+    @if fix(pc) {
+        html{background:$gf;}
+        body,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        dl, dd,
+        fieldset, form,
+        input, select, textarea,
+        figure {margin: 0;}
+        ul, ol, menu{list-style:none;margin:0;padding:0;}
+        body{font-size: 75%;line-height: 1.5;}
+        blockquote, q {quotes: none;}
+        blockquote:before, blockquote:after,
+        q:before, q:after {content: ''; content: none;}
+        table {border-collapse: collapse;border-spacing: 0;}
+        fieldset,a img, iframe{border:0 none;}
+        address, em, i {font-style:normal;}
+        abbr, acronym {font-variant:normal;}
+        hr {display:block;height:1px;border:0;border-top:1px solid $gc;margin:1em 0;padding:0;}
+        input, select, button {vertical-align:middle;}
+        @if fix(ie7) {
+            input, textarea, select {*font-size:100%;}
+            button {overflow:visible;}
+        }
+        @if fix(ff) {
+            button,
+            input[type=reset], input[type=button], input[type=submit], input[type=file] > input[type=button] {
+                &::-moz-focus-inner{
+                    border:0 none; padding:0;
+                }
+            }
+        }
+        :active{outline:0 none;}
+    }@else if fix(mobile) {
+        html{background:$gf;}
+        body,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        dl, dd,
+        fieldset, form,
+        figure {margin: 0;}
+        ul, ol, menu{list-style:none;margin:0;padding:0;}
+        body{font-size: 75%;line-height: 1.5;}
+        blockquote, q {quotes: none;}
+        blockquote:before, blockquote:after,
+        q:before, q:after {content: ''; content: none;}
+        ins {text-decoration: none;}
+        del {text-decoration: line-through;}
+        table {border-collapse: collapse;border-spacing: 0;}
+        fieldset,a img, iframe{border:0 none;}
+        address, em, i {font-style:normal;}
+        input, select {vertical-align:middle;}
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section, iframe {display: block;}
+    }
+}

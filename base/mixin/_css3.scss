@@ -1,0 +1,90 @@
+﻿@import "utilities";
+
+//@descrip: css3属性mixin。
+
+//= CSS3 圆角. border-radius(5px) ,border-radius(5px 6px/5px 4px)
+//= @param: $value:支持多种参数形式，比如5px, 5px 6px, 5px/8px, 5px 6px/5px 4px, 百分数，比如50%即正圆形;
+@mixin border-radius($value...){
+    @if not $value {
+        $value: $default-border-radius;
+    }
+    @include cross-browser(border-radius, $value);
+}
+
+//= CSS3 阴影.
+//= @param: $value:支持多种参数，多重阴影，数量不限，如inset 1px 1px 2px #ccc, 2px 2px 5px rgba(255,255,255,0.5);
+@mixin box-shadow($value...) {
+    @if not $value {
+        $value: $default-box-shadow;
+    }
+    @include cross-browser(box-shadow, $value, $ms:false);
+}
+
+//= css3 是否可选中页面中的内容
+//= @param: $value:auto, none, text, element, all, 默认为none;
+@mixin user-select($value: none){
+    @include cross-browser(user-select, $value);
+}
+
+//= css3 resize属性
+//= @param: $value:none, both, horizontal, vertical, inherit, 默认none不允许;
+@mixin resize($value: none) {
+    @include cross-browser(resize, $value, $ms:false);
+}
+
+//= ie滤镜实现垂直或水平渐变
+//= @param: $start, $end: 渐变开始/结束颜色;
+//= @param: $type: 渐变类型, 0为垂直，1为水平;
+@mixin filter-gradient($start, $end, $type:0) {
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=true, gradientType=#{$type}, startColorstr='#{iehex($start)}', endColorstr='#{iehex($end)}')\9;
+}
+
+//= css3 线性渐变，支持IE垂直或水平渐变，支持分开传开始/结束颜色（必须）。
+//= @param: $colors: 渐变开始/结束颜色,可包含每个颜色的位置，更可以包含多组颜色(写法支持多种形式);
+//= @param: $ms: 默认不提供对ie的支持，如需要请改为true，并且渐变颜色只支持第一个颜色到最后一个颜色的渐变;
+//= @param: $point: 渐变的位置及角度，默认为垂直无角度渐变，如果传0则为水平无角度渐变，其它请参考http://www.w3cplus.com/content/css3-gradient;
+@mixin linear-gradient($colors, $ms: false, $point: false, $property: background-image) {
+    @if typeof($colors) == color and typeof($ms) == color {
+        $colors: join($colors, $ms, comma);
+        $ms: $point;
+        $point: false;
+    }
+    $mstype: if(chk($point) and $point != top and point != bottom, 1, 0);
+    @include linear(($colors), $point, $property);
+    @if fix(8) and $ms {
+        $start: nth($colors, 1);
+        $end: nth($colors, length($colors));
+        @include filter-gradient($start,$end,$mstype);
+    }
+    //background-color:$end;
+}
+
+//= css3 径向渐变，支持分开传开始/结束颜色。
+//= @param: $colors:渐变开始/结束颜色,可包含每个颜色的位置，更可以包含多组颜色(写法支持多种形式);
+//= @param: $point:径向的位置方向，默认为从中心点开始向外扩散渐变;
+//= @param: $shape:径向梯度，指定渐变的形状（圆形或椭圆形）和大小（最近端，最近角，最远端，最远角，包含或覆盖 (closest-side, closest-corner, farthest-side, farthest-corner, contain or cover)），其它请参考http://www.w3cplus.com/content/css3-gradient;
+@mixin radial-gradient($colors, $point: false, $shape: null, $property:background-image) {
+    @if typeof($colors) == color and typeof($point) == color {
+        $colors: join($colors, $point, comma);
+        $point: false;
+    }
+    $point: join(($point), ($shape), comma);
+    @include radial(($colors), ($point), $property);
+}
+
+//= css3 box sizing
+@mixin box-sizing($type: $default-box-sizing){
+    @include cross-browser(box-sizing, $type, $moz:false, $o:false);
+}
+
+//= css3 transition
+@mixin transition($pro: $default-pro, $time: $default-time, $eff: $default-eff){
+    @include cross-browser(transition, $pro $time $eff);
+}
+
+//= css3 rotate
+@mixin rotate($deg: $default-deg,$time: $default-time){
+    @include cross-browser(transition-duration, $time, $moz:false, $o:false);
+    @include cross-browser(transform, rotate($deg), $moz:false, $o:false);
+}
+
