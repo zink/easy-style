@@ -1,6 +1,2 @@
-@import "base/function";
-@import "base/reset";
-//screen reset
-@mixin sc-reset(){
-  @include es-reset(SC);
-}
+﻿//@descrip: PC端样式表入口文件，使用时调用此文件，scss文件会自动包含所有支持PC端的方法
+@import "base/mixin";

@@ -1,52 +1,163 @@
-﻿//esbase初始化变量文件，此为初始化全局变量，请不要在此文件中给变量赋值，如需修改请在项目scss文件中覆盖
+﻿//exbase初始化变量文件，此为初始化全局变量，请不要在此文件中给变量赋值，如需修改请在项目scss文件中覆盖
 
-//页面总宽
-$es-container-width : 960px;
+//default platform
+$default-platform : SC !default;
 
-//跨浏览器初始化,定义是否进行跨浏览器支持
-$es-support-for-mozilla   : true;  //FireFox
-$es-support-for-original-webkit-gradients : true;
-$es-support-for-webkit    : true;  //Webkit
-$es-support-for-opera     : true;  //Opera
-$es-support-for-microsoft : true;  //IE
-$es-support-for-khtml     : true;  //other use khtml
-$es-support-for-svg       : false; //svg
-$es-support-for-pie       : false; //css3 pie
+//====grid system
+//grid columns
+$default-grid-columns : 24 !default;
+//grid width
+$default-grid-width : 30px !default;
+//grid margin
+$default-grid-margin : 10px !default;
+//grid outer width
+$default-grid-outer-width : $default-grid-width + $default-grid-margin!default;
+//page width
+$default-container-width : $default-grid-columns * $default-grid-outer-width - $default-grid-margin !default;
 
-//border radius默认值
-$default-border-radius    : 3px;
-
-//box shadow默认值
-$default-box-shadow-color    : #CCCCCC;
-$default-box-shadow-h-offset : 0px;
-$default-box-shadow-v-offset : 0px;
-$default-box-shadow-blur     : 5px;
-$default-box-shadow-spread   : false;
-$default-box-shadow-inset    : false;
+//========跨浏览器初始化,定义是否进行跨浏览器支持
+$ex-support-for-mozilla   : true;  //FireFox
+$ex-support-for-original-webkit-gradients : true; //safari or chrome old version
+$ex-support-for-webkit    : true;  //Webkit
+$ex-support-for-opera     : true;  //Opera
+$ex-support-for-microsoft : true;  //IE
+$ex-support-for-ie6       : true;  //IE6
+$ex-support-for-ie7       : true;  //IE7
+$ex-support-for-ie8       : true;  //IE8
+$ex-support-for-ie9       : true;  //IE9
+$ex-support-for-khtml     : false;  //other use khtml
+$ex-support-for-svg       : false; //svg
+$ex-support-for-pie       : false; //css3 pie
 
 //色彩值
-$c0 : #000000;
-$c1 : #111111;
-$c2 : #222222;
-$c3 : #333333;
-$c4 : #444444;
-$c5 : #555555;
-$c6 : #666666;
-$c7 : #777777;
-$c8 : #888888;
-$c9 : #999999;
-$ca : #AAAAAA;
-$cb : #BBBBBB;
-$cc : #CCCCCC;
-$cd : #DDDDDD;
-$ce : #EEEEEE;
-$cf : #FFFFFF;
+//灰度值
+$g0: #000000;
+$g1: #111111;
+$g2: #222222;
+$g3: #333333;
+$g4: #444444;
+$g5: #555555;
+$g6: #666666;
+$g7: #777777;
+$g8: #888888;
+$g9: #999999;
+$ga: #AAAAAA;
+$gb: #BBBBBB;
+$gc: #CCCCCC;
+$gd: #DDDDDD;
+$ge: #EEEEEE;
+$gf: #FFFFFF;
+
+//RGB相同色值
+$_03: #030303;
+$_36: #363636;
+$_69: #696969;
+$_96: #969696;
+$_8b: #8B8B8B;
+$bc : #BCBCBC;
+$c0 : #C0C0C0;
+$c3 : #C3C3C3;
+$c6 : #C6C6C6;
+$c9 : #C9C9C9;
+$d0 : #D0D0D0;
+$d3 : #D3D3D3;
+$d6 : #D6D6D6;
+$d9 : #D9D9D9;
+$dc : #DCDCDC;
+$df : #DFDFDF;
+$e0 : #E0E0E0;
+$e3 : #E3E3E3;
+$e5 : #E5E5E5;
+$e6 : #E6E6E6;
+$e9 : #E9E9E9;
+$ec : #ECECEC;
+$ef : #EFEFEF;
+$f0 : #F0F0F0;
+$f1 : #F1F1F1;
+$f3 : #F3F3F3;
+$f5 : #F5F5F5;
+$f6 : #F6F6F6;
+$f9 : #F9F9F9;
+$fc : #FCFCFC;
 //以下为简写的三位，请各位补充
 $f60 : #FF6600;
 $ff9 : #FFFF99;
+$ffc : #FFFFCC;
+$c00 : #CC0000;
 $f90 : #FF9900;
 $f00 : #FF0000;
-$_69c : #6699CC;
+$ff0 : #FFFF00;
+$_006: #000066;
+$_009: #000099;
+$_060: #006600;
+$_069: #006699;
+$_06c: #0066CC;
+$_369: #336699;
+$_36c: #3366CC;
+$_6cc: #66CCCC;
+$_69c: #6699CC;
+$_900: #909090;
+$_930: #993300;
 $ffc : #FFFFCC;
 $f30 : #FF3300;
-$_7b0 : #77BB00;
+$_7b0: #77BB00;
+
+
+//==========border 默认值
+$default-border-width     : 1px;
+$default-border-style     : solid;
+$default-border-color     : $gc;
+$default-border           : $default-border-width $default-border-style $default-border-color;
+$default-border-radius    : 3px;
+
+//==========box shadow默认值
+$default-box-shadow          : 1px 1px 1px $gc;
+$default-box-shadow-h-offset : 0;
+$default-box-shadow-v-offset : 0;
+$default-box-shadow-blur     : 5px;
+$default-box-shadow-color    : $gc;
+$default-box-shadow-spread   : false;
+$default-box-shadow-inset    : false;
+
+//==========box默认值
+$default-overflow    : hidden;
+$default-box-size    : 100%;
+$default-padding     : 1px;
+$default-margin      : 1px;
+$default-clear       : both;
+$default-width       : 100%;
+$default-position    : relative;
+$default-direct      : left;
+$default-direction   : top right bottom left;
+$default-line-height : 1.5;
+
+//==========form默认值
+$default-text-class : text !default;
+$default-form-class : form !default;
+
+//==========font属性
+$default-font-size       : 12px;
+$default-line-height     : 1.5;
+$default-font-family     : Tahoma, Helvetica, Arial, STXihei, SimSun, sans-serif;
+$default-body-font       : #{$default-font-size}/#{$default-line-height} $default-font-family;
+$default-hx-font         : Microsoft YaHei, STHeiti, sans-serif;
+$default-color           : $g3;
+$default-link-color      : blue;
+$default-hover-color     : adjust-color($default-link-color, $blue:-10);
+
+$default-text-align      : center;
+$default-text-decoration : none;
+$default-text-indent     : 0;
+$default-white-space     : nowrap;
+$default-text-transform  : none;
+$default-letter-spacing  : normal;
+$default-word-spacing    : normal;
+
+$default-deg     : 90deg;
+$default-time    : 500ms;
+$default-eff     : ease-in;
+$default-pro     : width;
+
+$default-item-class : item;
+$default-box-sizing : border-box;
+
