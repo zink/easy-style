@@ -1,35 +1,37 @@
-#emb .cubeleft {
+﻿@mixin fx_cube_right($namespace:emb){
+  ##{$namespace} .cuberight {
     -webkit-animation-duration: .55s;
-}
+  }
 
-#emb .cubeleft.in {
-    -webkit-transform-origin: 100% 50%;
-    -webkit-animation-name: cubeLeftIn;
-}
-
-#emb .cubeleft.out {
+  ##{$namespace} .cuberight.in {
     -webkit-transform-origin: 0% 50%;
-    -webkit-animation-name: cubeLeftOut;
-}
+    -webkit-animation-name: cubeRightIn;
+  }
 
-@-webkit-keyframes cubeLeftIn {
+  ##{$namespace} .cuberight.out {
+    -webkit-transform-origin: 100% 50%;
+    -webkit-animation-name: cubeRightOut;
+  }
+
+  @-webkit-keyframes cubeRightIn {
     0% {
-        -webkit-transform: rotateY(90deg) translateZ(100%) scale(.5);
-        opacity: .5;
+      -webkit-transform: rotateY(-90deg) translateZ(100%) scale(.5);
+      opacity: .5;
     }
     100% {
-        -webkit-transform: rotateY(00deg) translateZ(0) scale(1);
-        opacity: 1;
+      -webkit-transform: rotateY(0deg) translateZ(0) scale(1);
+      opacity: 1;
     }
-}
+  }
 
-@-webkit-keyframes cubeLeftOut {
+  @-webkit-keyframes cubeRightOut {
     0% {
-        -webkit-transform: rotateY(0deg) translateX(0) scale(1);
-        opacity: 1;
+      -webkit-transform: rotateY(0deg) translateX(0) scale(1);
+      opacity: 1;
     }
     100% {
-        -webkit-transform: rotateY(-90deg) translateZ(100%) scale(.5);
-        opacity: .5;
+      -webkit-transform: rotateY(90deg) translateZ(100%) scale(.5);
+      opacity: .5;
     }
+  }
 }

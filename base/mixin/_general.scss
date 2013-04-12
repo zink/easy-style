@@ -16,17 +16,16 @@
 //= @param: $way:both, left, right, fix, dom;
 @mixin clear($way: $default-clear){
     @if $way == fix{
-        display:block;
+        &:after {
+          display: block;
+          visibility: hidden;
+          height: 0;
+          overflow:hidden;
+          content: "\0020";
+          clear: both;
+        }
         @if fix(7) {
             *zoom:1;
-        }
-        &:after {
-          content: "\0020";
-          display: block;
-          height: 0;
-          clear: both;
-          visibility: hidden;
-          overflow:hidden;
         }
     }@else if $way == dom{
         clear: both;
@@ -426,7 +425,7 @@
             @if n($value, $i, false) {
                 #{$v}: n($value, $i);
             }
-            @else {
+            @else if n($value, $i, false) != false {
                 #{$v}: 0;
             }
             $i: $i+1;

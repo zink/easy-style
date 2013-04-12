@@ -1,28 +1,28 @@
-// Slide Up
-
-#emb .slideup.in {
+﻿@mixin fx_slide_up($namespace:emb){
+  ##{$namespace} .slideup.in {
     z-index: 10;
     -webkit-animation-name: slideUpIn;
-}
-#emb .slideup.out {
+  }
+  ##{$namespace} .slideup.out {
     z-index: 0;
     -webkit-animation-name: slideUpOut;
-}
+  }
 
-@-webkit-keyframes slideUpIn {
+  @-webkit-keyframes slideUpIn {
     0% {
-        -webkit-transform: translateY(100%);
+      -webkit-transform: translateY(100%);
     }
     100% {
-        -webkit-transform: translateY(0);
+      -webkit-transform: translateY(0);
     }
-}
+  }
 
-@-webkit-keyframes slideUpOut {
+  @-webkit-keyframes slideUpOut {
     0% {
-        -webkit-transform: translateY(0);
+      -webkit-transform: translateY(0);
     }
     100% {
-        -webkit-transform: translateY(0);
+      -webkit-transform: translateY(0);
     }
+  }
 }

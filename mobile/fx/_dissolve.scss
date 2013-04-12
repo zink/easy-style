@@ -1,27 +1,27 @@
-// Dissolve
-
-#emb .dissolve.in {
+﻿@mixin fx_dissolve($namespace:emb){
+  ##{$namespace} .dissolve.in {
     -webkit-animation-name: dissolveIn;
-}
+  }
 
-#emb .dissolve.out {
+  ##{$namespace} .dissolve.out {
     -webkit-animation-name: dissolveOut;
-}
+  }
 
-@-webkit-keyframes dissolveIn {
+  @-webkit-keyframes dissolveIn {
     0% {
-        opacity: 0;
+      opacity: 0;
     }
     100% {
-        opacity: 1;
+      opacity: 1;
     }
-}
+  }
 
-@-webkit-keyframes dissolveOut {
+  @-webkit-keyframes dissolveOut {
     0% {
-        opacity: 1;
+      opacity: 1;
     }
     100% {
-        opacity: 0;
+      opacity: 0;
     }
+  }
 }

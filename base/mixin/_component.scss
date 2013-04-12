@@ -34,7 +34,7 @@
 @mixin inline-box($class:false){
     @if $class{
         .#{$class}{
-          	@include float(left);
+            @include float(left);
         }
         @include clear(fix);
     }
@@ -60,29 +60,69 @@
     }
 }
 
-//= 未知高度图片垂直居中:ie6+,FF,safari,chrome;!doctype html;
+//= 未知高度图片垂直居中:ie6+,FF,safari,chrome;需要!doctype html;
 //= 例：<div><a><img></a></div>
-@mixin img-middle($width:$default-width, $height:true, $border:$default-border-color, $margin:false, $background:false){
+@mixin img-middle($width:$default-width, $height:true, $border:$default-border-color, $margin:false, $background:false, $overflow: hidden){
   @if $height==true {
-    $height: $width;
+      $height: $width;
   }
   $fontsize:$height*0.9;
-  @include box($width,$height,$height - 2px,true,$border,$background, false, false, false, $height, '*');
-  text-align:center;
+  @include box($width,$height,$height - 2px,$overflow,$border,$background, false, false, false, $height, '*'); text-align:center;
   @content;
   @if fix(7){
       *font-size:$fontsize;font-family:Arial;
   }
   @if $margin {
-    @include margin($margin);
+      @include margin($margin);
   }
   // *> &{font-size:$def-fontsize;}
   img{@include img-size($width,$height,true,true);}
 }
 
+//= 用于生成一个自适应高度的提示信息框
+//= @param: border,background,padding,color,width,overflow,line-height,position/left/top/right/bottom,z-index,border-radius,box-shadow,display,etc.;
+@mixin function-box($class,$border:$default-border,$background:false,$padding:false,$color:false,$width:false,$overflow:false,$line-height:false,$position:false, $z-index: false, $radius: false, $shadow:false,$display:false){
+    .#{$class} {
+        @include rect($width,false,$padding,false,false,$line-height,$border,$background,$display,$overflow,$position,$z-index,false,$radius,$shadow);
+        @if $color {
+            color:$color;
+        }
+        @content;
+    }
+}
+//= 生成梯形
+@mixin trape($direct:bottom, $width:10px, $height:5px, $border:$default-border-width $default-border-color $default-border-style, $bg:$gf, $offset: 0, $class: trape) {
+    $d:'';
+    $borderwidth: 0;
+    $style: $default-border-style;
+    $color: null;
+    $border: border-value($border);
+    @if $border {
+        $borderwidth: nth($border, 1);
+        $style: nth($border, 2);
+        $color: n($border, 3);
+    }
+    .#{$class}{
+        position: absolute;overflow: hidden;font-size:0;line-height:0;width: $width + $height * 2;height: $height;
+        i{position: absolute;width:$width;height:0;overflow:hidden;border:$height dashed transparent;}
+    }
+    .#{$class}-#{$direct}{
+        left:$offset;@content;
+        $pos: sqrt(pow($borderwidth,2)*2) - $width;
+        i{border-top-style:$style;border-top-width: if(unit($pos) == 'px', floor($pos), $pos);}
+        .below{border-top-color:$color; #{$direct}:-$height;}
+        .above{border-top-color:$bg; #{$direct}: - $height + $borderwidth;}
+    }
+}
 //= 生成各方向的三角箭头
 //= @param: $direct:all/left/right/top/bottom;
-@mixin arrow($direct: all, $size:5px, $border:$default-border-width $default-border-color $default-border-style, $bg:$gf, $offset: 0, $class: arrow) {
+//= @param: $size:三角的大小;
+//= @param: $border:其所在容器的border样式;
+//= @param: $bg:背景色，也是三角的颜色;
+//= @param: $offset: 三角相对于左/顶部的偏移量;
+//= @param: $class:三角的class名;
+//= @param: $nopos:是否针对各方向定位，除非想自定义三角的定位，否则请保持默认值false;
+@mixin arrow($direct: all, $size:5px, $border:$default-border-width $default-border-color $default-border-style, $bg:$gf, $offset: 0, $class: arrow, $nopos: false) {
     $d:'';
     $box:$size * 2;
     $width: 0;
@@ -103,9 +143,13 @@
         $d: if($v == left or $v == right, top, left);
         $oppo: opposite-position($v);
         .#{$class}-#{$v}{
-            #{nth($d,1)}:$offset; #{$v}:-$box;
+            #{nth($d,1)}:$offset;
+            @if not $nopos {
+                #{$v}:-$box;
+            }
+            @content;
             i{border-#{$oppo}-style:$style;}
-            @if $width and $color and $width > 0 {
+            @if $width and $color and $width >= 0 {
                 .below{border-#{$oppo}-color:$color; #{$v}:-$width;}
             }
             @if typeof($bg) == color {
@@ -138,16 +182,23 @@
 
 //= 弹出层的基本属性，如果属性不够用可以@include popup(params){propery:xxx;}包含其它css属性组合甚至include 其它mixin
 @mixin popup($z-index:false,$bg:$gf, $border:false, $width:false, $padding:false, $display:false){
-	@include rect($width, $padding:$padding, $border:$border,$background:$bg,$display:$display, $position: absolute, $z-index: $z-index);
+    @include rect($width, $padding:$padding, $border:$border,$background:$bg,$display:$display, $position: absolute, $z-index: $z-index);
     @content;
     &:focus{outline:0 none;}
 }
 
 //= 带箭头的弹出层，如果属性不够用可以@include popup-arrow(params){propery:xxx;}包含其它css属性组合甚至include 其它mixin
 @mixin popup-arrow($z-index: false, $bg:$gf, $border:false, $width:false, $direct: all, $arrow-size:5px, $offset:0) {
-	@include popup($z-index, $bg, $border, $width){
+    @include popup($z-index, $bg, $border, $width) {
         @content;
     };
     @include arrow($direct, $arrow-size, $border, $bg, $offset);
 }
 
+//= 生成遮罩层的基本属性
+@mixin mask($class:mask, $bg: $g3, $z:false, $opacity: false, $display: false) {
+    .#{$class}{
+        @include rect(100%, true, $background:$bg, $display: $display, $position: (absolute, z-index left top, $z), $opacity: $opacity);
+        @content;
+    }
+}

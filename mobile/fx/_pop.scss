@@ -1,31 +1,31 @@
-// Pop 
-
-#emb .pop.in {
+﻿@mixin fx_pop($namespace:emb){
+  ##{$namespace} .pop.in {
     -webkit-animation-name: popIn;
-}
+  }
 
-#emb .pop.out {
+  ##{$namespace} .pop.out {
     -webkit-animation-name: popOut;
-}
+  }
 
-@-webkit-keyframes popIn {
+  @-webkit-keyframes popIn {
     0% {
-        -webkit-transform: scale(.2);
-        opacity: 0;
+      -webkit-transform: scale(.2);
+      opacity: 0;
     }
     100% {
-        -webkit-transform: scale(1);
-        opacity: 1;
+      -webkit-transform: scale(1);
+      opacity: 1;
     }
-}
+  }
 
-@-webkit-keyframes popOut {
+  @-webkit-keyframes popOut {
     0% {
-        -webkit-transform: scale(1);
-        opacity: 1;
+      -webkit-transform: scale(1);
+      opacity: 1;
     }
     100% {
-        -webkit-transform: scale(.2);
-        opacity: 0;
+      -webkit-transform: scale(.2);
+      opacity: 0;
     }
+  }
 }

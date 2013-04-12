@@ -52,24 +52,31 @@
     $mstype: if(chk($point) and $point != top and point != bottom, 1, 0);
     @include linear(($colors), $point, $property);
     @if fix(8) and $ms {
-        $start: nth($colors, 1);
-        $end: nth($colors, length($colors));
-        @include filter-gradient($start,$end,$mstype);
+        @if $ms == true {
+            $start: nth($colors, 1);
+            $end: nth($colors, length($colors));
+            @include filter-gradient($start,$end,$mstype);
+        }
+        @else {
+            @include background($ms);
+        }
     }
-    //background-color:$end;
 }
 
 //= css3 径向渐变，支持分开传开始/结束颜色。
 //= @param: $colors:渐变开始/结束颜色,可包含每个颜色的位置，更可以包含多组颜色(写法支持多种形式);
 //= @param: $point:径向的位置方向，默认为从中心点开始向外扩散渐变;
 //= @param: $shape:径向梯度，指定渐变的形状（圆形或椭圆形）和大小（最近端，最近角，最远端，最远角，包含或覆盖 (closest-side, closest-corner, farthest-side, farthest-corner, contain or cover)），其它请参考http://www.w3cplus.com/content/css3-gradient;
-@mixin radial-gradient($colors, $point: false, $shape: null, $property:background-image) {
+@mixin radial-gradient($colors, $point: false, $shape: null, $ms: false, $property:background-image) {
     @if typeof($colors) == color and typeof($point) == color {
         $colors: join($colors, $point, comma);
         $point: false;
     }
     $point: join(($point), ($shape), comma);
     @include radial(($colors), ($point), $property);
+    @if fix(8) and $ms {
+        @include background($ms);
+    }
 }
 
 //= css3 box sizing
@@ -80,6 +87,11 @@
 //= css3 transition
 @mixin transition($pro: $default-pro, $time: $default-time, $eff: $default-eff){
     @include cross-browser(transition, $pro $time $eff);
+}
+
+//= css3 text-align-last
+@mixin text-align-last($value:justify){
+    @include cross-browser(text-align-last,$value, $o:false); 
 }
 
 //= css3 rotate

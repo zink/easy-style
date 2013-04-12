@@ -1,27 +1,27 @@
-// Slide Right
-
-#emb .slideright.in {
+﻿@mixin fx_slide_right($namespace:emb){
+  ##{$namespace} .slideright.in {
     -webkit-animation-name: slideRightIn;
-}
+  }
 
-#emb .slideright.out {
+  ##{$namespace} .slideright.out {
     -webkit-animation-name: slideRightOut;
-}
+  }
 
-@-webkit-keyframes slideRightIn {
+  @-webkit-keyframes slideRightIn {
     0% {
-        -webkit-transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
     }
     100% {
-        -webkit-transform: translateX(0);
+      -webkit-transform: translateX(0);
     }
-}
+  }
 
-@-webkit-keyframes slideRightOut {
+  @-webkit-keyframes slideRightOut {
     0% {
-        -webkit-transform: translateX(0);
+      -webkit-transform: translateX(0);
     }
     100% {
-        -webkit-transform: translateX(100%);
+      -webkit-transform: translateX(100%);
     }
+  }
 }

@@ -79,6 +79,7 @@ $f5 : #F5F5F5;
 $f6 : #F6F6F6;
 $f9 : #F9F9F9;
 $fc : #FCFCFC;
+$fe : #FEFEFE;
 //以下为简写的三位，请各位补充
 $f60 : #FF6600;
 $ff9 : #FFFF99;
@@ -130,6 +131,7 @@ $default-position    : relative;
 $default-direct      : left;
 $default-direction   : top right bottom left;
 $default-line-height : 1.5;
+$default-background  : $ge;
 
 //==========form默认值
 $default-text-class : text !default;

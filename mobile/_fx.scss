@@ -1,70 +1,10 @@
-a {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+﻿a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 body {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-touch-callout: none;
-}
-
-#emb {
-  -webkit-text-size-adjust: none;
-  -webkit-user-select: none;
-  bottom: 0;
-  font-family: "Helvetica Neue", Helvetica;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  .selectable,
-  input,
-  textarea {
-    -webkit-user-select: auto;
-  }
-  &.notransform {
-    -webkit-transform: none !important;
-  }
-}
-
-
-
-#emb > * {
-    -webkit-box-sizing: border-box;
-    display: none;
-    left: 0;
-    min-height: 100%;
-    overflow-x: hidden;
-    position: absolute;
-    width: 100%;
-    z-index: 0;
-}
-
-#emb > .current {
-    display: block !important;
-    z-index: 10;
-}
-
-#emb .in, #emb .out {
-    -webkit-animation-duration: 250ms;
-    -webkit-animation-fill-mode: both;
-    -webkit-animation-timing-function: ease-in-out;
-}
-
-#emb .in {
-    z-index: 10;
-}
-
-#emb .out {
-    z-index: 0 !important;
-}
-
-#emb.supports3d {
-    -webkit-perspective: 800;
-    -webkit-transform-style: preserve-3d;
-}
-
-#emb.supports3d > * {
-    -webkit-transform: translate3d(0,0,0) rotate(0) scale(1);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
 }
 // Fade
 @import "fx/fade";
@@ -92,3 +32,99 @@ body {
 @import "fx/cube_left";
 // Cube Right
 @import "fx/cube_right";
+@mixin fx($top : 0,$right : 0,$bottom : 0,$left : 0,$namespace:emb){
+    @if typeof($top) != number{
+    $namespace : $top;
+    $top : 0;
+    }
+    ##{$namespace} {
+        -webkit-user-select: none;
+        //bottom: $bottom;
+        font-family: "Helvetica Neue", Helvetica;
+        left: $left;
+        position: absolute;
+        float:left;
+        right: $right;
+        top: $top;
+        width:100%;
+        height:100%;
+        .selectable,
+        input,
+        textarea {
+          -webkit-user-select: auto;
+        }
+        &.notransform {
+          -webkit-transform: none !important;
+        }
+    }
+
+
+
+    ##{$namespace} > .action-page {
+        position:absolute;
+        -webkit-box-sizing: border-box;
+        display: none;
+        min-height: 100%;
+        overflow-x: hidden;
+        width: 100%;
+        z-index: 0;
+    }
+
+    ##{$namespace} > .current {
+        display: block !important;
+        z-index: 10;
+    }
+
+    ##{$namespace} .in, ##{$namespace} .out {
+        -webkit-animation-duration: 250ms;
+        -webkit-animation-fill-mode: both;
+        -webkit-animation-timing-function: ease-in-out;
+    }
+
+    ##{$namespace} .in {
+        z-index: 10;
+    }
+
+    ##{$namespace} .out {
+        z-index: 0 !important;
+    }
+
+    ##{$namespace}.supports3d {
+        -webkit-perspective: 800;
+        -webkit-transform-style: preserve-3d;
+    }
+
+    ##{$namespace}.supports3d > .action-page {
+        -webkit-transform: translate3d(0,0,0) rotate(0) scale(1);
+    }
+
+    ##{$namespace} .fx-box {
+        -webkit-perspective: 800;
+        -webkit-transform-style: flat;
+    }
+    ##{$namespace} .fx-box .fx-item {
+        -webkit-transform: translate(0) rotate(0) scale(1);
+    }
+    ##{$namespace} .fx-item{
+        position:absolute;
+    }
+
+    ##{$namespace} .fx-box > .current {
+        display: block;
+        z-index: 10;
+    }
+
+    @include fx_fade($namespace);
+    @include fx_dissolve($namespace);
+    @include fx_pop($namespace);
+    @include fx_slide_left($namespace);
+    @include fx_slide_right($namespace);
+    @include fx_slide_up($namespace);
+    @include fx_slide_down($namespace);
+    @include fx_flip_left($namespace);
+    @include fx_flip_right($namespace);
+    @include fx_swap_right($namespace);
+    @include fx_swap_left($namespace);
+    @include fx_cube_left($namespace);
+    @include fx_cube_right($namespace);
+}

@@ -128,8 +128,8 @@
 @mixin ex-display($value) {
 	@include display($value);
 }
-@mixin ex-rect($width:false, $height:false, $padding: false, $margin: false, $float:false, $line:false, $border: false, $background:false, $display: false, $overflow:false, $radius: false, $shadow:false, $position:false, $z-index:false, $opacity:false) {
-	@include rect($width, $height, $padding, $margin, $float, $line, $border, $background, $display, $overflow, $position, $z-index, $opacity, $radius, $shadow);
+@mixin ex-rect($width:false, $height:false, $padding: false, $margin: false, $float:false, $line:false, $border: false, $background:false, $display: false, $overflow:false, $radius: false, $shadow:false, $position:false, $z-index:false, $opacity:false, $clear: false, $radius:false, $shadow:false) {
+	@include rect($width, $height, $padding, $margin, $float, $line, $border, $background, $display, $overflow, $position, $z-index, $opacity, $clear, $radius, $shadow);
 }
 @mixin ex-text-overflow($width: $default-width,$height: false,$line-height: false){
 	@include text-overflow($width,$height,$line-height);
