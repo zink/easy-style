@@ -53,10 +53,10 @@
     } @else {
         @if $value == box {
             @if fix(webkit) {
-                display:-webkit(box);
+                display:-webkit-box;
             }
             @if fix(ff) {
-                display:-moz(box);
+                display:-moz-box;
             }
         }
     }

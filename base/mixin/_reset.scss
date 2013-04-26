@@ -21,11 +21,12 @@
         address, em, i {font-style:normal;}
         abbr, acronym {font-variant:normal;}
         hr {display:block;height:1px;border:0;border-top:1px solid $gc;margin:1em 0;padding:0;}
+        :active{outline:0 none;}
         input, select, button {vertical-align:middle;}
+        input, select, button, textarea {font-size:100%;font-family: inherit;}
         @if fix(ie7) {
             button {*overflow:visible;}
         }
-        input, select, textarea {font-size:100%;font-family: inherit;}
         @if fix(ff) {
             button,
             input[type=reset], input[type=button], input[type=submit], input[type=file] > input[type=button] {
@@ -34,7 +35,6 @@
                 }
             }
         }
-        :active{outline:0 none;}
     }@else if fix(mobile) {
         html{background:$gf;}
         body,
