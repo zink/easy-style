@@ -100,3 +100,20 @@
     @include cross-browser(transform, rotate($deg), $moz:false, $o:false);
 }
 
+@mixin placeholder($color: $g9, $selector: null) {
+    @if($color) {
+        @if fix(webkit) {
+            #{$selector}::-webkit-input-placeholder { color:$color;@content; }
+        }
+        @if fix(moz) {
+            #{$selector}::-moz-placeholder { color:$color;@content; } // firefox 19+
+            #{$selector}:-moz-placeholder { color:$color;@content; }
+        }
+        @if fix(ms) {
+            #{$selector}:-ms-input-placeholder { color:$color;@content; }
+        }
+        @if fix(ie9) {
+            #{$selector}.placeholder { color:$color;@content; }
+        }
+    }
+}
