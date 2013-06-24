@@ -181,8 +181,11 @@
 }
 
 //= 弹出层的基本属性，如果属性不够用可以@include popup(params){propery:xxx;}包含其它css属性组合甚至include 其它mixin
-@mixin popup($z-index:false,$bg:$gf, $border:false, $width:false, $padding:false, $display:false){
-    @include rect($width, $padding:$padding, $border:$border,$background:$bg,$display:$display, $position: absolute, $z-index: $z-index);
+@mixin popup($z-index:false,$bg:$gf, $border:false, $width:false, $padding:false, $shadow: false, $display:false, $visibility: false){
+    @include rect($width, $padding:$padding, $border:$border,$background:$bg,$display:$display, $position: absolute, $z-index: $z-index, $shadow: $shadow);
+    @if $visibility {
+        visibility: $visibility;
+    }
     @content;
     &:focus{outline:0 none;}
 }
