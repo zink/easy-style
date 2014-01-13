@@ -62,6 +62,20 @@
     }
 }
 
+//= 配合display:box设置box-flex
+@mixin box-flex($value : 1,$hack: true) {
+    box-flex:$value;
+    @if fix(webkit) {
+        -webkit-box-flex:$value;
+    }
+    @if fix(ff) {
+        -moz-box-flex:$value;
+    }
+    @if fix(10) and $hack {
+        -ms-box-flex:$value;
+    }
+}
+
 //= 生成背景或背景色或背景位置
 //= @param: $value:color值时生成背景色，数值或位置信息时生成背景位置，其余生成完整的background;
 @mixin background($value){

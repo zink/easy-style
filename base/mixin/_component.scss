@@ -67,13 +67,14 @@
       $height: $width;
   }
   $fontsize:$height*0.9;
-  @include box($width,$height,$height - 2px,$overflow,$border,$background, false, false, false, $height, '*'); text-align:center;
+  @include box($width,$height,$height - 2px,$overflow,$border,$background, false, false, false, $height, if(fix(7), '*', null));
+  @if $margin {
+      @include margin($margin);
+  }
+  text-align:center;
   @content;
   @if fix(7){
       *font-size:$fontsize;font-family:Arial;
-  }
-  @if $margin {
-      @include margin($margin);
   }
   // *> &{font-size:$def-fontsize;}
   img{@include img-size($width,$height,true,true);}

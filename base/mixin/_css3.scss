@@ -84,9 +84,17 @@
     @include cross-browser(box-sizing, $type, $moz:false, $o:false);
 }
 
+//= css3 box align
+@mixin box-align($value){
+    @include cross-browser(box-align, $value);
+}
+
 //= css3 transition
 @mixin transition($pro: $default-pro, $time: $default-time, $eff: $default-eff){
     @include cross-browser(transition, $pro $time $eff);
+}
+@mixin transition-timing-function($eff: $default-eff) {
+    @include cross-browser(transition-timing-function, $eff);
 }
 
 //= css3 text-align-last

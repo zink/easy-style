@@ -1,16 +1,8 @@
-﻿a {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-body {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-touch-callout: none;
-}
-// Fade
+﻿// Fade
 @import "fx/fade";
 // Dissolve
 @import "fx/dissolve";
-// Pop 
+// Pop
 @import "fx/pop";
 // Slide Left
 @import "fx/slide_left";
