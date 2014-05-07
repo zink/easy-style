@@ -1,4 +1,4 @@
-﻿@import "utilities";
+@import "utilities";
 
 //@descrip: css3属性mixin。
 
@@ -89,6 +89,21 @@
     @include cross-browser(box-align, $value);
 }
 
+//= css3 background size
+@mixin background-size($value){
+    @include cross-browser(background-size, $value);
+}
+
+//= css3 background clip
+@mixin background-clip($value){
+    @include cross-browser(background-clip, $value);
+}
+
+//= css3 background origin 
+@mixin background-origin($value){
+    @include cross-browser(background-origin, $value);
+}
+
 //= css3 transition
 @mixin transition($pro: $default-pro, $time: $default-time, $eff: $default-eff){
     @include cross-browser(transition, $pro $time $eff);
@@ -117,11 +132,48 @@
             #{$selector}::-moz-placeholder { color:$color;@content; } // firefox 19+
             #{$selector}:-moz-placeholder { color:$color;@content; }
         }
-        @if fix(ms) {
+        @if fix(ie10) {
             #{$selector}:-ms-input-placeholder { color:$color;@content; }
         }
         @if fix(ie9) {
             #{$selector}.placeholder { color:$color;@content; }
         }
     }
+}
+
+@mixin appearance($value:none){
+    @include cross-browser(appearance, $value, $o:false);
+}
+
+@mixin filter($value:none){
+    @include cross-browser(filter, $value, $o:false, $ms:true);
+}
+
+@mixin animation($value...) {
+    @include cross-browser(animation, $value...);
+}
+
+@mixin keyframe($name, $prop:null, $from: null, $to:null) {
+    @keyframes #{$name} {
+        from {#{$prop}:$from;}
+        to {#{$prop}:$to;}
+    }
+    @-moz-keyframes #{$name} {
+        from {#{$prop}:$from;}
+        to {#{$prop}:$to;}
+    }
+    @-webkit-keyframes #{$name} {
+        from {#{$prop}:$from;}
+        to {#{$prop}:$to;}
+    }
+    @-o-keyframes #{$name} {
+        from {#{$prop}:$from;}
+        to {#{$prop}:$to;}
+    }
+}
+@mixin slide($name, $from:null, $to:null) {
+    @include keyframe($name, top, $from, $to);
+}
+@mixin fade($name, $from:null, $to:null) {
+    @include keyframe($name, opacity, $from, $to);
 }

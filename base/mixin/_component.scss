@@ -1,4 +1,4 @@
-﻿@import "utilities";
+@import "utilities";
 
 //@descrip: 组件mixin，与模块或JS组件相关
 
@@ -155,9 +155,53 @@
             }
             @if typeof($bg) == color {
                 $pos: sqrt(pow($width,2)*2) - $width;
-                .above{border-#{$oppo}-color:$bg; #{$v}: if(unit($pos) == 'px', floor($pos), $pos);}
+                .above{border-#{$oppo}-color:$bg; #{$v}: if(unit($pos) == 'px', floor($pos), $pos);#{nth($d,1)}:0;}
             }
         }
+    }
+}
+@mixin trian($direct: down, $size:5px, $bg: $ge, $border: null, $selector: '&') {
+    $box:$size * 2;
+    $border: border-value($border);
+    $d: if($direct == left or $direct == right, top, left);
+    $oppo: opposite-position($direct);
+    @if $border {
+        $width: n($border, 1);
+        $style: nth($border, 2);
+        $color: n($border, 3);
+        $pos: sqrt(pow($width,2)*2);
+        $pos: if(unit($pos) == 'px', floor($pos), $pos);
+        $bgsize: $size + $pos;
+        @debug $pos;
+        #{$selector}:after {
+            content: '\0020';
+            position: absolute;
+            #{$direct}: - ($pos * 2 + $size * 2);
+            #{$d}: calc(50% - #{$bgsize});
+            width: 0; height: 0;
+            @if fix(ie7) {
+                overflow: hidden;
+            }
+            border: $bgsize dashed transparent;
+            border-#{$oppo}-style:$style;
+            border-#{$oppo}-color:$color;
+            @content;
+        }
+    }
+    #{$selector}:before {
+        content: '\0020';
+        position: absolute;
+        #{$direct}: - $size * 2;
+        #{$d}: calc(50% - #{$size});
+        z-index:2;
+        width: 0; height: 0;
+        @if fix(ie7) {
+            overflow: hidden;
+        }
+        border: $size dashed transparent;
+        border-#{$oppo}-style:solid;
+        border-#{$oppo}-color:$bg;
+        @content;
     }
 }
 

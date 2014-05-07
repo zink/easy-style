@@ -1,4 +1,4 @@
-﻿@import "../function";
+@import "../function";
 
 //@descrip: css reset，分别返回pc端或移动端的reset属性
 
@@ -10,6 +10,7 @@
         dl, dd,
         fieldset, form,
         input, select, textarea,
+        button,
         figure {margin: 0;}
         ul, ol, menu{list-style:none;margin:0;padding:0;}
         body{font-size: 75%;line-height: 1.5;}
@@ -37,8 +38,6 @@
         }
         @include placeholder;
     }@else if fix(mobile) {
-        article, aside, details, figcaption, figure,
-        footer, header, hgroup, menu, nav, section, iframe {display: block;}
         body,
         h1, h2, h3, h4, h5, h6, p, blockquote, pre,
         dl, dd,
@@ -48,11 +47,6 @@
         button{margin:0;padding:0;}
         ul, ol, menu{list-style:none;margin:0;padding:0;}
         body{font-size: 75%;line-height: 1.5;-webkit-touch-callout: none;}
-        blockquote, q {quotes: none;}
-        blockquote:before, blockquote:after,
-        q:before, q:after {content: '';}
-        ins {text-decoration: none;}
-        del {text-decoration: line-through;}
         table {border-collapse: collapse;border-spacing: 0;}
         fieldset,a img, iframe{border:0 none;}
         address, em, i {font-style:normal;}

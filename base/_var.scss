@@ -1,4 +1,4 @@
-﻿//exbase初始化变量文件，此为初始化全局变量，请不要在此文件中给变量赋值，如需修改请在项目scss文件中覆盖
+//exbase初始化变量文件，此为初始化全局变量，请不要在此文件中给变量赋值，如需修改请在项目scss文件中覆盖
 
 //default platform
 $default-platform : SC !default;
@@ -24,8 +24,8 @@ $ex-support-for-microsoft : true;  //IE
 $ex-support-for-ie6       : true;  //IE6
 $ex-support-for-ie7       : true;  //IE7
 $ex-support-for-ie8       : true;  //IE8
-$ex-support-for-ie10      : true;  //IE10
 $ex-support-for-ie9       : true;  //IE9
+$ex-support-for-ie10      : true;  //IE10
 $ex-support-for-khtml     : false;  //other use khtml
 $ex-support-for-svg       : false; //svg
 $ex-support-for-pie       : false; //css3 pie
@@ -97,6 +97,7 @@ $_06c: #0066CC;
 $_369: #336699;
 $_36c: #3366CC;
 $_6cc: #66CCCC;
+$_690: #669900;
 $_69c: #6699CC;
 $_900: #909090;
 $_930: #993300;

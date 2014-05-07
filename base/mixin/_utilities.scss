@@ -1,4 +1,4 @@
-﻿@import "../function";
+@import "../function";
 
 //@descrip: 工具性mixin，一般不做外部调用
 
@@ -61,6 +61,9 @@
     }
     @each $v in owg webkit moz svg o ms {
         @if fix($v) and prefixed(-#{$v}, $image) {
+            @if $property == 'mask-image' {
+                $property: -#{v}#{$property};
+            }
             #{$property}: prefix(-#{$v}, $image);
             @if $v == svg {
                 background-size: 100%;
