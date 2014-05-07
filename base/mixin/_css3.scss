@@ -1,3 +1,4 @@
+@charset "utf-8";
 @import "utilities";
 
 //@descrip: css3属性mixin。
@@ -149,6 +150,9 @@
     @include cross-browser(filter, $value, $o:false, $ms:true);
 }
 
+@mixin text-size-adjust() {
+    @include cross-browser(filter, $value, $o:false, $moz:false, $ms:true);
+}
 @mixin animation($value...) {
     @include cross-browser(animation, $value...);
 }

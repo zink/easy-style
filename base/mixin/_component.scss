@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "utilities";
 
 //@descrip: 组件mixin，与模块或JS组件相关
@@ -172,7 +173,6 @@
         $pos: sqrt(pow($width,2)*2);
         $pos: if(unit($pos) == 'px', floor($pos), $pos);
         $bgsize: $size + $pos;
-        @debug $pos;
         #{$selector}:after {
             content: '\0020';
             position: absolute;
