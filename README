@@ -1,6 +1,8 @@
 所需环境：
 
-sass升到最新版本(3.2.X以上)
-compass升到最新版本(0.12.X以上)
+ruby(1.9.x)
+sass(3.3.x)
+compass(1.0.x)
 
 详细用法请参考：http://ueddoc.ec-ae.com/index.php/sass/api
+
