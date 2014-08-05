@@ -4,13 +4,8 @@
 //==use mobile base
 $default-platform : MB;
 
-//==phone screen width
-$phone-width : 320px !default;
-
 //==default page color
-$main-color    : #8F4F30 !default;
-$aid-color     : #8F4F30 !default;
-$dotting-colot : #8F4F30 !default;
+// ...color: #8F4F30;
 
 @mixin add-to-home(){
     //Main container
@@ -66,12 +61,11 @@ $dotting-colot : #8F4F30 !default;
             height:14px; line-height:10px;
             text-align:center;
             text-indent:1px;
-            font-size:14px;
+            font-size:13px;
             -webkit-border-radius:7px;
             background:rgba(0,0,0,0.12);
             color:#707070;
             -webkit-box-shadow:0 1px 0 #fff;
-            font-size:13px;
         }
         //The '+' icon, displayed only on iOS < 4.2
         .plus {

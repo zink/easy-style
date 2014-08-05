@@ -1,4 +1,5 @@
-﻿@import "utilities";
+@charset "utf-8";
+@import "utilities";
 
 //@descrip: css3属性mixin。
 
@@ -52,24 +53,31 @@
     $mstype: if(chk($point) and $point != top and point != bottom, 1, 0);
     @include linear(($colors), $point, $property);
     @if fix(8) and $ms {
-        $start: nth($colors, 1);
-        $end: nth($colors, length($colors));
-        @include filter-gradient($start,$end,$mstype);
+        @if $ms == true {
+            $start: nth($colors, 1);
+            $end: nth($colors, length($colors));
+            @include filter-gradient($start,$end,$mstype);
+        }
+        @else {
+            @include background($ms);
+        }
     }
-    //background-color:$end;
 }
 
 //= css3 径向渐变，支持分开传开始/结束颜色。
 //= @param: $colors:渐变开始/结束颜色,可包含每个颜色的位置，更可以包含多组颜色(写法支持多种形式);
 //= @param: $point:径向的位置方向，默认为从中心点开始向外扩散渐变;
 //= @param: $shape:径向梯度，指定渐变的形状（圆形或椭圆形）和大小（最近端，最近角，最远端，最远角，包含或覆盖 (closest-side, closest-corner, farthest-side, farthest-corner, contain or cover)），其它请参考http://www.w3cplus.com/content/css3-gradient;
-@mixin radial-gradient($colors, $point: false, $shape: null, $property:background-image) {
+@mixin radial-gradient($colors, $point: false, $shape: null, $ms: false, $property:background-image) {
     @if typeof($colors) == color and typeof($point) == color {
         $colors: join($colors, $point, comma);
         $point: false;
     }
     $point: join(($point), ($shape), comma);
     @include radial(($colors), ($point), $property);
+    @if fix(8) and $ms {
+        @include background($ms);
+    }
 }
 
 //= css3 box sizing
@@ -77,9 +85,37 @@
     @include cross-browser(box-sizing, $type, $moz:false, $o:false);
 }
 
+//= css3 box align
+@mixin box-align($value){
+    @include cross-browser(box-align, $value);
+}
+
+//= css3 background size
+@mixin background-size($value){
+    @include cross-browser(background-size, $value);
+}
+
+//= css3 background clip
+@mixin background-clip($value){
+    @include cross-browser(background-clip, $value);
+}
+
+//= css3 background origin 
+@mixin background-origin($value){
+    @include cross-browser(background-origin, $value);
+}
+
 //= css3 transition
 @mixin transition($pro: $default-pro, $time: $default-time, $eff: $default-eff){
     @include cross-browser(transition, $pro $time $eff);
+}
+@mixin transition-timing-function($eff: $default-eff) {
+    @include cross-browser(transition-timing-function, $eff);
+}
+
+//= css3 text-align-last
+@mixin text-align-last($value:justify){
+    @include cross-browser(text-align-last,$value, $o:false); 
 }
 
 //= css3 rotate
@@ -88,3 +124,60 @@
     @include cross-browser(transform, rotate($deg), $moz:false, $o:false);
 }
 
+@mixin placeholder($color: $g9, $selector: null) {
+    @if($color) {
+        @if fix(webkit) {
+            #{$selector}::-webkit-input-placeholder { color:$color;@content; }
+        }
+        @if fix(moz) {
+            #{$selector}::-moz-placeholder { color:$color;@content; } // firefox 19+
+            #{$selector}:-moz-placeholder { color:$color;@content; }
+        }
+        @if fix(ie10) {
+            #{$selector}:-ms-input-placeholder { color:$color;@content; }
+        }
+        @if fix(ie9) {
+            #{$selector}.placeholder { color:$color;@content; }
+        }
+    }
+}
+
+@mixin appearance($value:none){
+    @include cross-browser(appearance, $value, $o:false);
+}
+
+@mixin filter($value:none){
+    @include cross-browser(filter, $value, $o:false, $ms:true);
+}
+
+@mixin text-size-adjust() {
+    @include cross-browser(filter, $value, $o:false, $moz:false, $ms:true);
+}
+@mixin animation($value...) {
+    @include cross-browser(animation, $value...);
+}
+
+@mixin keyframe($name, $prop:null, $from: null, $to:null) {
+    @keyframes #{$name} {
+        from {#{$prop}:$from;}
+        to {#{$prop}:$to;}
+    }
+    @-moz-keyframes #{$name} {
+        from {#{$prop}:$from;}
+        to {#{$prop}:$to;}
+    }
+    @-webkit-keyframes #{$name} {
+        from {#{$prop}:$from;}
+        to {#{$prop}:$to;}
+    }
+    @-o-keyframes #{$name} {
+        from {#{$prop}:$from;}
+        to {#{$prop}:$to;}
+    }
+}
+@mixin slide($name, $from:null, $to:null) {
+    @include keyframe($name, top, $from, $to);
+}
+@mixin fade($name, $from:null, $to:null) {
+    @include keyframe($name, opacity, $from, $to);
+}

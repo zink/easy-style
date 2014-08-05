@@ -1,4 +1,5 @@
-﻿//exbase初始化变量文件，此为初始化全局变量，请不要在此文件中给变量赋值，如需修改请在项目scss文件中覆盖
+@charset "UTF-8";
+//exbase初始化变量文件，此为初始化全局变量，请不要在此文件中给变量赋值，如需修改请在项目scss文件中覆盖
 
 //default platform
 $default-platform : SC !default;
@@ -25,6 +26,7 @@ $ex-support-for-ie6       : true;  //IE6
 $ex-support-for-ie7       : true;  //IE7
 $ex-support-for-ie8       : true;  //IE8
 $ex-support-for-ie9       : true;  //IE9
+$ex-support-for-ie10      : true;  //IE10
 $ex-support-for-khtml     : false;  //other use khtml
 $ex-support-for-svg       : false; //svg
 $ex-support-for-pie       : false; //css3 pie
@@ -79,6 +81,7 @@ $f5 : #F5F5F5;
 $f6 : #F6F6F6;
 $f9 : #F9F9F9;
 $fc : #FCFCFC;
+$fe : #FEFEFE;
 //以下为简写的三位，请各位补充
 $f60 : #FF6600;
 $ff9 : #FFFF99;
@@ -95,6 +98,7 @@ $_06c: #0066CC;
 $_369: #336699;
 $_36c: #3366CC;
 $_6cc: #66CCCC;
+$_690: #669900;
 $_69c: #6699CC;
 $_900: #909090;
 $_930: #993300;
@@ -130,6 +134,7 @@ $default-position    : relative;
 $default-direct      : left;
 $default-direction   : top right bottom left;
 $default-line-height : 1.5;
+$default-background  : $ge;
 
 //==========form默认值
 $default-text-class : text !default;
@@ -138,9 +143,10 @@ $default-form-class : form !default;
 //==========font属性
 $default-font-size       : 12px;
 $default-line-height     : 1.5;
-$default-font-family     : Tahoma, Helvetica, Arial, STXihei, SimSun, sans-serif;
+$default-font-family     : Lucida Grande, Lucida Sans Unicode, Tahoma, Helvetica, Arial,Hiragino Sans GB, sans-serif; // 为同时兼容xp和mac的字体效果，去除STXihei,SimSun
+$default-ie7-font-family : Tahoma, Arial, SimSun, sans-serif; //vista, xp下ie6/7下默认字体
+$default-hx-font-family  : Microsoft YaHei, STHeiti, sans-serif;
 $default-body-font       : #{$default-font-size}/#{$default-line-height} $default-font-family;
-$default-hx-font         : Microsoft YaHei, STHeiti, sans-serif;
 $default-color           : $g3;
 $default-link-color      : blue;
 $default-hover-color     : adjust-color($default-link-color, $blue:-10);

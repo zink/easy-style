@@ -1,27 +1,27 @@
-// Fade
-
-#emb .fade.in {
+﻿@mixin fx_fade($namespace:emb){
+  ##{$namespace} .fade.in {
     -webkit-animation-name: fadeIn;
-}
+  }
 
-#emb .fade.out {
+  ##{$namespace} .fade.out {
     -webkit-animation-name: fadeOut;
-}
+  }
 
-@-webkit-keyframes fadeIn {
+  @-webkit-keyframes fadeIn {
     0% {
-        opacity: 0;
+      opacity: 0;
     }
     100% {
-        opacity: 1;
+      opacity: 1;
     }
-}
+  }
 
-@-webkit-keyframes fadeOut {
+  @-webkit-keyframes fadeOut {
     0% {
-        opacity: 1;
+      opacity: 1;
     }
     100% {
-        opacity: 0;
+      opacity: 0;
     }
+  }
 }

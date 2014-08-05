@@ -1,29 +1,31 @@
-#emb .flipright {
+﻿@mixin fx_flip_left($namespace:emb){
+  ##{$namespace} .flipleft {
     -webkit-backface-visibility: hidden;
-}
+  }
 
-#emb .flipright.in {
-    -webkit-animation-name: flipRightIn;
-}
+  ##{$namespace} .flipleft.in {
+    -webkit-animation-name: flipLeftIn;
+  }
 
-#emb .flipright.out {
-    -webkit-animation-name: flipRightOut;
-}
+  ##{$namespace} .flipleft.out {
+    -webkit-animation-name: flipLeftOut;
+  }
 
-@-webkit-keyframes flipRightIn {
+  @-webkit-keyframes flipLeftIn {
     0% {
-        -webkit-transform: rotateY(-180deg) scale(.8);
+      -webkit-transform: rotateY(180deg) scale(.8);
     }
     100% {
-        -webkit-transform: rotateY(0deg) scale(1);
+      -webkit-transform: rotateY(0deg) scale(1);
     }
-}
+  }
 
-@-webkit-keyframes flipRightOut {
+  @-webkit-keyframes flipLeftOut {
     0% {
-        -webkit-transform: rotateY(0deg) scale(1);
+      -webkit-transform: rotateY(0deg) scale(1);
     }
     100% {
-        -webkit-transform: rotateY(180deg) scale(.8);
+      -webkit-transform: rotateY(-180deg) scale(.8);
     }
+  }
 }

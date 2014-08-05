@@ -1,4 +1,5 @@
-﻿@import "utilities";
+@charset "UTF-8";
+@import "utilities";
 
 //@descrip: 页面视图相关mixin
 
@@ -187,7 +188,7 @@
 }
 
 //= 矩形/盒模型属性，按顺序生成为display,position,left/top/right/bottom,z-index,background,opacity,float,width,height,line-height,padding,margin,border,border-radius,box-shadow
-@mixin rect($width:false, $height:false, $padding: false, $margin: false, $float:false, $line:false, $border: false, $background:false, $display: false, $overflow:false,$position:false, $z-index: false, $opacity:false, $radius: false, $shadow:false) {
+@mixin rect($width:false, $height:false, $padding: false, $margin: false, $float:false, $line:false, $border: false, $background:false, $display: false, $overflow:false,$position:false, $z-index: false, $opacity:false, $clear:false, $radius: false, $shadow:false) {
     @if $display {
         @include display($display);
     }
@@ -253,5 +254,8 @@
     }
     @if $shadow {
         @include box-shadow($shadow);
+    }
+    @if $clear {
+        @include clear($clear);
     }
 }

@@ -1,4 +1,5 @@
-﻿@import "utilities";
+@charset "UTF-8";
+@import "utilities";
 
 //@descrip: 文本与字体类mixin
 
@@ -69,6 +70,26 @@
         @include height($height,$line-height);
     }
     @include text(false, $overflow);
+}
+
+//= 文本两端对齐，用于多行标题两边对齐
+@mixin text-justify($class:text-justify){
+    .#{$class} {
+        @content;
+        text-align:justify;
+        text-justify:distribute-all-lines;//ie6-8
+        @include text-align-last;//ie9/ff/chrome 20+
+    }
+    //chrome/safari
+    @media screen and (-webkit-min-device-pixel-ratio:0){
+        .#{$class}:after{
+            content:"\200B";
+            display: inline-block;
+            width:100%;
+            overflow:hidden;
+            height:0;
+        }
+    }
 }
 
 //= font face,支持ie6+主流浏览器的web字体

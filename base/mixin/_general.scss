@@ -1,4 +1,5 @@
-﻿@import "utilities";
+@charset "UTF-8";
+@import "utilities";
 
 //@descrip: css属性mixin，单一或几种相近css属性的混合，主要用于盒模型
 
@@ -16,17 +17,16 @@
 //= @param: $way:both, left, right, fix, dom;
 @mixin clear($way: $default-clear){
     @if $way == fix{
-        display:block;
+        &:after {
+          display: block;
+          visibility: hidden;
+          height: 0;
+          overflow:hidden;
+          content: "\0020";
+          clear: both;
+        }
         @if fix(7) {
             *zoom:1;
-        }
-        &:after {
-          content: "\0020";
-          display: block;
-          height: 0;
-          clear: both;
-          visibility: hidden;
-          overflow:hidden;
         }
     }@else if $way == dom{
         clear: both;
@@ -54,12 +54,26 @@
     } @else {
         @if $value == box {
             @if fix(webkit) {
-                display:-webkit(box);
+                display:-webkit-box;
             }
             @if fix(ff) {
-                display:-moz(box);
+                display:-moz-box;
             }
         }
+    }
+}
+
+//= 配合display:box设置box-flex
+@mixin box-flex($value : 1,$hack: true) {
+    box-flex:$value;
+    @if fix(webkit) {
+        -webkit-box-flex:$value;
+    }
+    @if fix(ff) {
+        -moz-box-flex:$value;
+    }
+    @if fix(10) and $hack {
+        -ms-box-flex:$value;
     }
 }
 
@@ -406,16 +420,27 @@
 }
 
 //= position属性：position,z-index,left,top,right,bottom
-//= @param: $pos:可以为集合，包含$direct及$value;
-//= @param: $direct:z-index/left/right/top/bottom其中之一或组合，还可以包含zero/lt/rb/lb/rt/cc/tc/lc/rc/bc等值分别类似9点定位的各顶点;
+//= @param: $pos:可以为集合，包含$direct/$value/z-index;
+//= @param: $direct:z-index/left/top/right/bottom其中之一或组合，还可以包含zero/lt/rb/lb/rt/cc/tc/lc/rc/bc等值分别类似9点定位的各顶点;
 //= @param: $value:各属性值或组合;
-//= @param: $z/$l/$t/$r/$b分别设置各属性;
+//= @param: $z/$l/$t/$r/$b分别设置z-index/left/top/right/bottom属性;
 @mixin position($pos:$default-position, $direct:false, $value:$default-position, $z:false, $l:false, $t:false, $r:false, $b:false) {
     @if $pos {
         @if typeof($pos) == list {
-            $z: n($pos,4);
-            $value: n($pos, 3, false);
-            $direct: nth($pos, 2);
+            @if typeof(nth($pos, 2)) == number {
+                $l:nth($pos, 2);
+                @if typeof(n($pos, 3, false)) == number {
+                    $t:n($pos, 3, false);
+                }
+                @if typeof(n($pos, 4, false)) == number {
+                    $z:n($pos, 4, false);
+                }
+            }
+            @else {
+                $z: n($pos,4, false);
+                $value: n($pos, 3, false);
+                $direct: nth($pos, 2);
+            }
             $pos: nth($pos, 1);
         }
         position: $pos;
@@ -426,7 +451,7 @@
             @if n($value, $i, false) {
                 #{$v}: n($value, $i);
             }
-            @else {
+            @else if n($value, $i, false) != false {
                 #{$v}: 0;
             }
             $i: $i+1;
