@@ -17,16 +17,18 @@
 //= @param: $way:both, left, right, fix, dom;
 @mixin clear($way: $default-clear){
     @if $way == fix{
-        &:after {
-          display: block;
-          visibility: hidden;
-          height: 0;
-          overflow:hidden;
-          content: "\0020";
-          clear: both;
-        }
         @if fix(7) {
             *zoom:1;
+        }
+        &:after {
+            content: "\0020";
+            display: block;
+            visibility: hidden;
+            clear: both;
+            @if fix(7) {
+                height: 0;
+                overflow: hidden;
+            }
         }
     }@else if $way == dom{
         clear: both;
