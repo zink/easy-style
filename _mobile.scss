@@ -1,8 +1,22 @@
-﻿@import "base/mixin";
+﻿//==use mobile base
+$default-platform : MB;
+
+$ex-support-for-mozilla   : true;  //FireFox
+$ex-support-for-webkit    : true;  //Webkit
+$ex-support-for-owg       : true;  //safari or chrome old version
+$ex-support-for-webkit533 : true;  //Webkit533, for android 2.3.x
+$ex-support-for-opera     : false; //Opera
+$ex-support-for-microsoft : false; //IE
+$ex-support-for-ie6       : false; //IE6
+$ex-support-for-ie7       : false; //IE7
+$ex-support-for-ie8       : false; //IE8
+$ex-support-for-ie9       : false; //IE9
+$ex-support-for-ie10      : false; //IE10
+$ex-support-for-ie11      : false; //IE11
+
+@import "base/mixin";
 @import "base/mixin/normal";
 @import "mobile/fx";
-//==use mobile base
-$default-platform : MB;
 
 //==default page color
 // ...color: #8F4F30;
