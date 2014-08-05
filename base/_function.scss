@@ -6,7 +6,7 @@
 //== 判断是否需要修复特定的平台或特定版本的浏览器
 //== @param: $who:浏览器版本或平台，包括ie6-10, ff, safari, chrome, webkit, opera, khtml, svg, pie, mobile, pc;
 //== @return: 浏览器版本，由此可推导出$who的值;
-@function fix($who:6, $value:false) {
+@function fix($who:ie6) {
     @if typeof($who) == list {
         $r: null;
         @each $v in $who {
@@ -26,7 +26,13 @@
     @if ($who == 9 or $who == ie9) and ($ex-support-for-ie9 or $ex-support-for-microsoft) and $default-platform != MB {
         @return ie9;
     }
-    @if ($who == 10 or $who == ie10) and ($ex-support-for-ie10 or $ex-support-for-microsoft) and $default-platform != MB {
+    @if ($who == 10 or $who == ie10) and ($ex-support-for-ie10 or $ex-support-for-microsoft) {
+        @return ie10;
+    }
+    @if ($who == 11 or $who == ie11) and ($ex-support-for-ie11 or $ex-support-for-microsoft) {
+        @return ie10;
+    }
+    @if ($who == 12 or $who == ie12) and ($ex-support-for-ie12 or $ex-support-for-microsoft) {
         @return ie10;
     }
     @if ($who == ie or $who == ms) and $ex-support-for-microsoft {
@@ -44,19 +50,22 @@
     @if $who == webkit and $ex-support-for-webkit {
         @return webkit;
     }
-    @if $who == owg and $ex-support-for-original-webkit-gradients {
+    @if ($who == webkit533 or $who == adr2) and $ex-support-for-webkit533 {
+        @return webkit533;
+    }
+    @if $who == owg and $ex-support-for-owg {
         @return owg;
     }
     @if ($who == o or $who == opera) and $ex-support-for-opera {
-        @return opera;
+        @return op;
     }
     @if $who == khtml and $ex-support-for-khtml and $default-platform != MB {
         @return khtml;
     }
-    @if ($who == mobile or $who == mb or $who == MB) and $default-platform == MB {
+    @if ($who == mobile or $who == mb or $who == MB or $who == adr or $who == android or $who == ios) and $default-platform == MB {
         @return mobile;
     }
-    @if ($who == PC or $who == pc or $who == SC) and $default-platform == SC {
+    @if ($who == PC or $who == pc or $who == SC) and ($default-platform == SC or $default-platform == PC) {
         @return pc;
     }
     @if $who == svg and $ex-support-for-svg {
@@ -131,6 +140,22 @@
         }
     }
     @return $v;
+}
+//== 十进制转十六进制
+@function dec-to-hex($d) { 
+  $hexVals: "ABCDEF"; 
+  $base: 16; 
+  $quotient: $d; 
+  $result: ""; 
+  @while $quotient != 0 { 
+      $mod: $quotient % $base; 
+      $quotient: floor($quotient / $base); 
+      @if$mod > 9 { 
+         $mod: str-slice($hexVals, $mod - 9, $mod - 9); 
+      }; 
+      $result: $mod + $result; 
+ } 
+ @return $result; 
 }
 //== 拼接属性字符串
 //== @return: 以给定的$seq拼接后的结果，如$value不是list则返回原值;
@@ -255,3 +280,34 @@
 @function span($n:1){
     @return $default-grid-width * $n + $default-grid-margin * ($n - 1);
 }
+
+@function linear-gradient($angle, $details...) {
+  $legacy-syntax: $ex-support-for-owg;
+
+  @if type-of($angle) != 'number' {
+    $angle: compact($angle);
+    $legacy-syntax: if(index($angle, 'to'), false, true);
+  }
+
+  @if $legacy-syntax {
+    @return _linear-gradient_legacy($angle, $details...);
+  } @else {
+    @return _linear-gradient($angle, $details...);
+  }
+}
+
+@function radial-gradient($angle, $details...) {
+  $legacy-syntax: $ex-support-for-owg;
+
+  @if type-of($angle) != 'number' {
+    $angle: compact($angle);
+    $legacy-syntax: if(index($angle, 'to'), false, true);
+  }
+
+  @if $legacy-syntax {
+    @return _radial-gradient_legacy($angle, $details...);
+  } @else {
+    @return _radial-gradient($angle, $details...);
+  }
+}
+

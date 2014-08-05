@@ -11,7 +11,7 @@
     @if $official {
         #{$property}: $value;
     }
-    @if $webkit and fix(webkit) and (not fix(mb) or $property != 'border-radius') {
+    @if $webkit and fix(webkit) {
         -webkit-#{$property}: $value;
     }
     @if $moz and fix(ff) {

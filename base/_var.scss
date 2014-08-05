@@ -1,7 +1,7 @@
 @charset "UTF-8";
-//exbase初始化变量文件，此为初始化全局变量，请不要在此文件中给变量赋值，如需修改请在项目scss文件中覆盖
+//初始化变量文件，此为初始化全局变量，请不要在此文件中给变量赋值，如需修改请在项目scss文件中覆盖
 
-//default platform
+//default platform support: sc,pc,mb,adr,ios,adr2,adr4,ios5
 $default-platform : SC !default;
 
 //====grid system
@@ -17,19 +17,22 @@ $default-grid-outer-width : $default-grid-width + $default-grid-margin!default;
 $default-container-width : $default-grid-columns * $default-grid-outer-width - $default-grid-margin !default;
 
 //========跨浏览器初始化,定义是否进行跨浏览器支持
-$ex-support-for-mozilla   : true;  //FireFox
-$ex-support-for-original-webkit-gradients : true; //safari or chrome old version
-$ex-support-for-webkit    : true;  //Webkit
-$ex-support-for-opera     : true;  //Opera
-$ex-support-for-microsoft : true;  //IE
-$ex-support-for-ie6       : true;  //IE6
-$ex-support-for-ie7       : true;  //IE7
-$ex-support-for-ie8       : true;  //IE8
-$ex-support-for-ie9       : true;  //IE9
-$ex-support-for-ie10      : true;  //IE10
-$ex-support-for-khtml     : false;  //other use khtml
-$ex-support-for-svg       : false; //svg
-$ex-support-for-pie       : false; //css3 pie
+$ex-support-for-mozilla   : true !default;  //FireFox
+$ex-support-for-webkit    : true !default;  //Webkit
+$ex-support-for-owg       : true !default;  //safari or chrome old version, or android 2.3.x, for original-webkit-gradients
+$ex-support-for-webkit533 : true !default;  //Webkit533, for android 2.3.x
+$ex-support-for-opera     : false !default; //Opera
+$ex-support-for-microsoft : true !default;  //IE
+$ex-support-for-ie6       : true !default;  //IE6
+$ex-support-for-ie7       : true !default;  //IE7
+$ex-support-for-ie8       : true !default;  //IE8
+$ex-support-for-ie9       : true !default;  //IE9
+$ex-support-for-ie10      : true !default;  //IE10
+$ex-support-for-ie11      : true !default;  //IE11
+$ex-support-for-ie12      : true !default;  //IE12
+$ex-support-for-khtml     : false !default; //other use khtml
+$ex-support-for-svg       : false !default; //svg
+$ex-support-for-pie       : false !default; //css3 pie
 
 //色彩值
 //灰度值

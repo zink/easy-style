@@ -259,3 +259,20 @@
         @include clear($clear);
     }
 }
+
+//= 滤镜实现灰度效果，暂不兼容ff
+@mixin grayscale($value:100%) {
+    @if fix(webkit) {
+        -webkit-filter: grayscale($value);
+    }
+    @if fix(moz) {
+        -moz-filter: grayscale($value);
+    }
+    @if fix(ms) {
+        // filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); //标准写法
+        filter:Gray; //简写
+        @if fix(ie7) {
+            *zoom:1;
+        }
+    }
+}

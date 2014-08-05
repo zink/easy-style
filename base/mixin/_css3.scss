@@ -36,7 +36,7 @@
 //= ie滤镜实现垂直或水平渐变
 //= @param: $start, $end: 渐变开始/结束颜色;
 //= @param: $type: 渐变类型, 0为垂直，1为水平;
-@mixin filter-gradient($start, $end, $type:0) {
+@mixin filter-gradient($start, $end:$start, $type:0) {
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=true, gradientType=#{$type}, startColorstr='#{iehex($start)}', endColorstr='#{iehex($end)}')\9;
 }
 
@@ -82,7 +82,7 @@
 
 //= css3 box sizing
 @mixin box-sizing($type: $default-box-sizing){
-    @include cross-browser(box-sizing, $type, $moz:false, $o:false);
+    @include cross-browser(box-sizing, $type);
 }
 
 //= css3 box align
@@ -112,6 +112,9 @@
 @mixin transition-timing-function($eff: $default-eff) {
     @include cross-browser(transition-timing-function, $eff);
 }
+@mixin transition-duration($time:$default-time) {
+    @include cross-browser(transition-duration, $time, $moz:false, $o:false);
+}
 
 //= css3 text-align-last
 @mixin text-align-last($value:justify){
@@ -119,9 +122,11 @@
 }
 
 //= css3 rotate
-@mixin rotate($deg: $default-deg,$time: $default-time){
-    @include cross-browser(transition-duration, $time, $moz:false, $o:false);
+@mixin rotate($deg: $default-deg,$time:null){
     @include cross-browser(transform, rotate($deg), $moz:false, $o:false);
+    @if $time {
+        @include transition-duration($time);
+    }
 }
 
 @mixin placeholder($color: $g9, $selector: null) {
@@ -150,27 +155,42 @@
     @include cross-browser(filter, $value, $o:false, $ms:true);
 }
 
-@mixin text-size-adjust() {
-    @include cross-browser(filter, $value, $o:false, $moz:false, $ms:true);
+@mixin text-size-adjust($value:none) {
+    @include cross-browser(text-size-adjust, $value, $o:false, $ms:true);
 }
 @mixin animation($value...) {
     @include cross-browser(animation, $value...);
 }
+@mixin calc($prop, $value) {
+    @if fix(webkit) {
+        #{$prop}: -webkit-calc(#{$value});
+    }
+    @if fix(moz) {
+        #{$prop}: -moz-calc(#{$value});
+    }
+    #{$prop}: calc(#{$value});
+}
 
 @mixin keyframe($name, $prop:null, $from: null, $to:null) {
+    @if fix(moz) {
+        @-moz-keyframes #{$name} {
+            from {#{$prop}:$from;}
+            to {#{$prop}:$to;}
+        }
+    }
+    @if fix(webkit) {
+        @-webkit-keyframes #{$name} {
+            from {#{$prop}:$from;}
+            to {#{$prop}:$to;}
+        }
+    }
+    @if fix(opera) {
+        @-o-keyframes #{$name} {
+            from {#{$prop}:$from;}
+            to {#{$prop}:$to;}
+        }
+    }
     @keyframes #{$name} {
-        from {#{$prop}:$from;}
-        to {#{$prop}:$to;}
-    }
-    @-moz-keyframes #{$name} {
-        from {#{$prop}:$from;}
-        to {#{$prop}:$to;}
-    }
-    @-webkit-keyframes #{$name} {
-        from {#{$prop}:$from;}
-        to {#{$prop}:$to;}
-    }
-    @-o-keyframes #{$name} {
         from {#{$prop}:$from;}
         to {#{$prop}:$to;}
     }

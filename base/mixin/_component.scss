@@ -64,21 +64,25 @@
 //= 未知高度图片垂直居中:ie6+,FF,safari,chrome;需要!doctype html;
 //= 例：<div><a><img></a></div>
 @mixin img-middle($width:$default-width, $height:true, $border:$default-border-color, $margin:false, $background:false, $overflow: hidden){
-  @if $height==true {
-      $height: $width;
-  }
-  $fontsize:$height*0.9;
-  @include box($width,$height,$height - 2px,$overflow,$border,$background, false, false, false, $height, if(fix(7), '*', null));
-  @if $margin {
-      @include margin($margin);
-  }
-  text-align:center;
-  @content;
-  @if fix(7){
-      *font-size:$fontsize;font-family:Arial;
-  }
-  // *> &{font-size:$def-fontsize;}
-  img{@include img-size($width,$height,true,true);}
+    @if $height==true {
+        $height: $width;
+    }
+    $fontsize:$height*0.9;
+    @include box($width,$height,if(fix(ie7), $height - 2px, null), $overflow,$border,$background, false, false, false, $height, if(fix(7), '*', null));
+    @if $margin {
+        @include margin($margin);
+    }
+    text-align:center;
+    @if not fix(7){
+        display: table-cell;
+        vertical-align: middle;
+    }
+    @else {
+        *font-size:$fontsize;font-family:Arial;
+    }
+    @content;
+    // *> &{font-size:$def-fontsize;}
+    img{@include img-size($width,$height,true,true);}
 }
 
 //= 用于生成一个自适应高度的提示信息框
@@ -161,11 +165,29 @@
         }
     }
 }
-@mixin trian($direct: down, $size:5px, $bg: $ge, $border: null, $selector: '&') {
+@mixin trian($direct: bottom, $size:5px, $bg: $ge, $border: null, $selector: '&', $nopos: false) {
     $box:$size * 2;
     $border: border-value($border);
     $d: if($direct == left or $direct == right, top, left);
     $oppo: opposite-position($direct);
+    #{$selector}:before {
+        content: '\0020';
+        position: absolute;
+        @if not $nopos {
+            #{$direct}: - $size * 2;
+        }
+        $val: 50% - #{$size};
+        @include calc($d, $val);
+        z-index:2;
+        width: 0; height: 0;
+        @if fix(ie7) {
+            overflow: hidden;
+        }
+        border: $size dashed transparent;
+        border-#{$oppo}-style:solid;
+        border-#{$oppo}-color:$bg;
+        @content;
+    }
     @if $border {
         $width: n($border, 1);
         $style: nth($border, 2);
@@ -176,8 +198,13 @@
         #{$selector}:after {
             content: '\0020';
             position: absolute;
-            #{$direct}: - ($pos * 2 + $size * 2);
-            #{$d}: calc(50% - #{$bgsize});
+            #{$direct}: -$bgsize * 2;
+            @if fix(webkit533) {
+                #{$d}: $bgsize;
+            }
+            @else {
+                #{$d}: calc(50% - #{$bgsize});
+            }
             width: 0; height: 0;
             @if fix(ie7) {
                 overflow: hidden;
@@ -187,21 +214,6 @@
             border-#{$oppo}-color:$color;
             @content;
         }
-    }
-    #{$selector}:before {
-        content: '\0020';
-        position: absolute;
-        #{$direct}: - $size * 2;
-        #{$d}: calc(50% - #{$size});
-        z-index:2;
-        width: 0; height: 0;
-        @if fix(ie7) {
-            overflow: hidden;
-        }
-        border: $size dashed transparent;
-        border-#{$oppo}-style:solid;
-        border-#{$oppo}-color:$bg;
-        @content;
     }
 }
 
