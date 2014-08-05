@@ -95,7 +95,7 @@
 //= font face,支持ie6+主流浏览器的web字体
 //= @param: $font:字体集，不带后缀，同时也做为字体名称，也可带字体路径，路径在前，字体在后，以空格分隔;
 //= @param: $path:字体路径，带引号，且最后不要/;
-@mixin font-face($font, $path:null) {
+@mixin font-face($font, $path:null, $cls:icon, $type: '-', $attr: null) {
     $name: $font;
     @if typeof($font) == list {
         $path: nth($font, 1);
@@ -104,10 +104,62 @@
     $font: if($path, unquote(#{$path})/#{$name}, $name);
     @font-face {
         font-family: $name;
-        src: url('#{$font}.eot');
-        src: url('#{$font}.eot?#ie9') format('embedded-opentype'), url("#{$font}.ttf") format("truetype"),url("#{$font}.svg#webfontMFqI76bT") format("svg");
+        @if fix(ie8) {
+            src: url('#{$font}.eot');
+        }
+        @if fix(ie9) and fix(pc) and (fix(moz) or fix(webkit)) {
+            src: url('#{$font}.eot?#ie9') format('embedded-opentype'),
+                url('#{$font}.woff') format('woff'),
+                url('#{$font}.ttf') format('truetype'),
+                url('#{$font}.svg#webfontMFqI76bT') format('svg');
+        }
+        @else if fix(pc) and (fix(moz) or fix(webkit)) {
+            src: url('#{$font}.woff') format('woff'),
+                url('#{$font}.ttf') format('truetype'),
+                url('#{$font}.svg#webfontMFqI76bT') format('svg');
+        }
+        @else if fix(mb) and fix(webkit533) {
+            src: url('#{$font}.woff') format('woff'),
+                url('#{$font}.ttf') format('truetype');
+        }
+        @else if fix(mb) {
+            src: url('#{$font}.woff') format('woff');
+        }
         font-weight: normal;
         font-style: normal;
+    }
+
+    $selector: null;
+    @if $type == '.' {
+        $selector: #{$type}#{$cls};
+    }
+    @elseif not fix(ie6) {
+        $selector: unquote("[class^='#{$cls}#{$type}'], [class*=' #{$cls}#{$type}']");
+    }
+    @if $selector {
+        #{$selector} {
+            font-family: #{$name};
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            // line-height: 1;
+            @content;
+
+            @if fix(webkit) {
+                -webkit-font-smoothing: antialiased;
+            }
+            @if fix(moz) {
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            @if($attr) {
+                &:before{
+                    content: attr(#{$attr});
+                }
+            }
+        }
     }
 }
 
