@@ -100,7 +100,7 @@
     @include cross-browser(background-clip, $value);
 }
 
-//= css3 background origin 
+//= css3 background origin
 @mixin background-origin($value){
     @include cross-browser(background-origin, $value);
 }
@@ -118,7 +118,23 @@
 
 //= css3 text-align-last
 @mixin text-align-last($value:justify){
-    @include cross-browser(text-align-last,$value, $o:false); 
+    @include cross-browser(text-align-last,$value, $o:false);
+}
+
+//= css3 transform
+@mixin transform($value,$time:null){
+    @include cross-browser(transform, $value, $o:false);
+    @if $time {
+        @include transition-duration($time);
+    }
+}
+
+//= css3 scale
+@mixin scale($value: $default-scale,$time:null){
+    @include cross-browser(transform, scale($value), $moz:false, $o:false);
+    @if $time {
+        @include transition-duration($time);
+    }
 }
 
 //= css3 rotate
