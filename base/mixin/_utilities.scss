@@ -6,11 +6,8 @@
 //= CSS3 跨浏览器工具函数
 //= @param: $property:css3属性;
 //= @param: $value:属性值;
-//= @param: 是否需支持以下浏览器:$official 原生, $moz firefox, $webkit, opera, $ms 微软ie9-10, $khtml
+//= @param: 是否需支持以下浏览器:$official 原生, $moz firefox, $webkit chrome and safari, $o opera, $ms 微软IE, $khtml KDE
 @mixin cross-browser($property, $value, $official: true,$moz: $ex-support-for-mozilla, $webkit: $ex-support-for-webkit, $o: $ex-support-for-opera, $ms: $ex-support-for-microsoft, $khtml: $ex-support-for-khtml) {
-    @if $official {
-        #{$property}: $value;
-    }
     @if $webkit and fix(webkit) {
         -webkit-#{$property}: $value;
     }
@@ -18,15 +15,18 @@
         -moz-#{$property}: $value;
     }
     @if fix(pc) {
-        @if $o and fix(o) {
-            -o-#{$property}: $value;
+        @if $khtml and fix(khtml) {
+            -khtml-#{$property}: $value;
         }
         @if $ms and fix(ie) {
             -ms-#{$property}: $value;
         }
-        @if $khtml and fix(khtml) {
-            -khtml-#{$property}: $value;
+        @if $o and fix(o) {
+            -o-#{$property}: $value;
         }
+    }
+    @if $official {
+        #{$property}: $value;
     }
 }
 
