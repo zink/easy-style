@@ -1,4 +1,3 @@
-@charset "UTF-8";
 //load exbase var exbase 全局变量文件
 //@descrip: 函数列表,直接函数名调用
 @import "var";
@@ -142,20 +141,20 @@
     @return $v;
 }
 //== 十进制转十六进制
-@function dec-to-hex($d) { 
-  $hexVals: "ABCDEF"; 
-  $base: 16; 
-  $quotient: $d; 
-  $result: ""; 
-  @while $quotient != 0 { 
-      $mod: $quotient % $base; 
-      $quotient: floor($quotient / $base); 
-      @if$mod > 9 { 
-         $mod: str-slice($hexVals, $mod - 9, $mod - 9); 
-      }; 
-      $result: $mod + $result; 
- } 
- @return $result; 
+@function dec-to-hex($d) {
+  $hexVals: "ABCDEF";
+  $base: 16;
+  $quotient: $d;
+  $result: "";
+  @while $quotient != 0 {
+      $mod: $quotient % $base;
+      $quotient: floor($quotient / $base);
+      @if$mod > 9 {
+         $mod: str-slice($hexVals, $mod - 9, $mod - 9);
+      };
+      $result: $mod + $result;
+ }
+ @return $result;
 }
 //== 拼接属性字符串
 //== @return: 以给定的$seq拼接后的结果，如$value不是list则返回原值;

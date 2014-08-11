@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import "utilities";
 
 //@descrip: css属性mixin，单一或几种相近css属性的混合，主要用于盒模型
@@ -104,13 +103,13 @@
 //= @param: $axis:x/y/all;
 //= @param: $way:overflow's value;
 @mixin overflow($axis: all,$way: $default-overflow){
-	@if not index(x y, $axis) {
-		@if index(hidden visible scroll auto inherit, $axis) {
-			$way: $axis;
-		}
-		$axis: null;
-	}
-	#{splice(overflow $axis)}: $way;
+    @if not index(x y, $axis) {
+        @if index(hidden visible scroll auto inherit, $axis) {
+            $way: $axis;
+        }
+        $axis: null;
+    }
+    #{splice(overflow $axis)}: $way;
 }
 
 //= 设置宽度
@@ -255,9 +254,9 @@
                     }
                 }
             }@else if $color == default {
-            	border: $default-border-width $default-border-style $default-border-color;
+                border: $default-border-width $default-border-style $default-border-color;
             }@else if $color == none {
-            	border: 0 none;
+                border: 0 none;
             }@else {
                 border: $width $color $default-border-color;
             }

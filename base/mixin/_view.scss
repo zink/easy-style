@@ -1,5 +1,4 @@
-@charset "UTF-8";
-@import "utilities";
+
 
 //@descrip: 页面视图相关mixin
 
@@ -28,12 +27,12 @@
 
 //= 页面列表类元素first one
 @mixin first($class:first, $direct:left){
-	@include list-one($class, $direct);
+    @include list-one($class, $direct);
 }
 
 //= 页面列表类元素last one
 @mixin last($class:last, $direct:right){
-	@include list-one($class, $direct);
+    @include list-one($class, $direct);
 }
 
 //= 跨浏览器的inline-block方式，只有在块元素用于inline-block时才需要hack。
@@ -196,7 +195,7 @@
         @include position($position);
     }
     @if typeof($z-index) == number {
-    	z-index: $z-index;
+        z-index: $z-index;
     }
     @if $background {
         @include background($background);
