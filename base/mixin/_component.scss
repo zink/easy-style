@@ -237,8 +237,8 @@
 }
 
 //= 弹出层的基本属性，如果属性不够用可以@include popup(params){propery:xxx;}包含其它css属性组合甚至include 其它mixin
-@mixin popup($z-index:false,$bg:$gf, $border:false, $width:false, $padding:false, $shadow: false, $display:false, $visibility: false){
-    @include rect($width, $padding:$padding, $border:$border,$background:$bg,$display:$display, $position: absolute, $z-index: $z-index, $shadow: $shadow);
+@mixin popup($z-index: false, $bg: $gf, $position: false, $border: false, $width: false, $padding: false, $shadow: false, $display: false, $visibility: false){
+    @include rect($width, $padding:$padding, $border:$border,$background:$bg,$display:$display, $position: if($position, $position, absolute), $z-index: $z-index, $shadow: $shadow);
     @if $visibility {
         visibility: $visibility;
     }
@@ -255,9 +255,9 @@
 }
 
 //= 生成遮罩层的基本属性
-@mixin mask($class:mask, $bg: $g3, $z:false, $opacity: false, $display: false) {
+@mixin mask($class:mask, $bg: $g3, $z-index:null, $position:null, $opacity: null, $display: null) {
     .#{$class}{
-        @include rect(100%, true, $background:$bg, $display: $display, $position: (absolute, z-index left top, $z), $opacity: $opacity);
+        @include rect(100%, true, $background:$bg, $display: $display, $position: (if($position, $position, absolute), z-index left top, $z-index), $opacity: $opacity);
         @content;
     }
 }
