@@ -143,8 +143,10 @@
     $height: $value;
     $value: no-important($value);
     @if typeof($value) == list {
-        $line-height: nth($value, 2);
-        $height: nth($value, 1);
+        @if nth($value, 2) != !important {
+            $line-height: nth($value, 2);
+            $height: nth($value, 1);
+        }
     }
     $value: if(typeof($value) == number, $value, $height);
     @include set-size(height, $height, $hack, $type);
@@ -154,7 +156,7 @@
         $line: true;
         @include line-height($line-height, $hack-line, $type);
     }
-    @if fix(pc) and $hack == true {
+    @if fix(pc) and $hack == true and typeof($value) == number {
         @if unit($value) == px or $value == 0 {
             @if $value < $default-font-size {
                 @if not $line {
