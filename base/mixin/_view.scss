@@ -114,6 +114,9 @@
         #{$max}width: $width;
     }
     @if $height {
+        @if $height == true {
+            $height: $width;
+        }
         #{$max}height: $height;
     }
     @if $hack{

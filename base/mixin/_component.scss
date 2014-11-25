@@ -62,17 +62,37 @@
 
 //= 未知高度图片垂直居中:ie6+,FF,safari,chrome;需要!doctype html;
 //= 例：<div><a><img></a></div>
-@mixin img-middle($width:$default-width, $height:true, $border:$default-border-color, $margin:false, $background:false, $overflow: hidden){
-    @if $height==true {
+@mixin img-middle($width:$default-width, $height:true, $border:$default-border-color, $margin:false, $background:false, $overflow: hidden, $sizing: null){
+    @if $height == true {
         $height: $width;
     }
-    $fontsize:$height*0.9;
-    @include box($width,$height,if(fix(ie7), $height - 2px, null), $overflow,$border,$background, false, false, false, $height, if(fix(7), '*', null));
+    // $imagewidth: null;
+    $imageheight: null;
+    @if $sizing == border-box {
+        $border-width: null;
+        @if typeof($border) == list {
+            @each $v in $border {
+                @if typeof($v) == number {
+                    $border-width: $v;
+                }
+            }
+        }
+        @else if typeof($border) == number {
+            $border-width: $border;
+        }
+        @else {
+            $border-width: 1px;
+        }
+        // $imagewidth: $width - $border-width * 2;
+        $imageheight: $height - $border-width * 2;
+    }
+    $fontsize: $height * 0.9;
+    @include box($width,$height,if(fix(ie7), if($imageheight, $imageheight - 2px, $height - 2px), null), $overflow,$border,$background, false, false, false, $height, if(fix(7), '*', null));
     @if $margin {
         @include margin($margin);
     }
     text-align:center;
-    @if not fix(7){
+    @if not fix(7) {
         display: table-cell;
         vertical-align: middle;
     }
@@ -81,7 +101,7 @@
     }
     @content;
     // *> &{font-size:$def-fontsize;}
-    img{@include img-size($width,$height,true,true);}
+    img{@include img-size(100%,true,true,true);}
 }
 
 //= 用于生成一个自适应高度的提示信息框
