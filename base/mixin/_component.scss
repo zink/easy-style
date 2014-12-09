@@ -198,10 +198,8 @@
         $val: 50% - #{$size};
         @include calc($d, $val);
         z-index:2;
-        width: 0; height: 0;
-        @if fix(ie7) {
-            overflow: hidden;
-        }
+        width: 0;
+        height: 0;
         border: $size dashed transparent;
         border-#{$oppo}-style:solid;
         border-#{$oppo}-color:$bg;
@@ -222,12 +220,12 @@
                 #{$d}: $bgsize;
             }
             @else {
-                #{$d}: calc(50% - #{$bgsize});
+                $val: 50% - #{$bgsize};
+                @include calc($d, $val);
+                // #{$d}: calc();
             }
-            width: 0; height: 0;
-            @if fix(ie7) {
-                overflow: hidden;
-            }
+            width: 0;
+            height: 0;
             border: $bgsize dashed transparent;
             border-#{$oppo}-style:$style;
             border-#{$oppo}-color:$color;
