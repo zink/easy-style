@@ -3,47 +3,43 @@
 //@descrip: grid 栅格化相关
 
 //= 栅格化页面宽度
-@mixin grid-container(){
-    @include container($default-container-width, 0 auto);
+@mixin grid-container($width: $default-container-width){
+    margin-left: auto;
+    margin-right: auto;
+    width: $width;
 }
-//=last grid
-@mixin grid-last($direct:left){
-    @include list-one(false, $direct);
+//= 栅格中的某行
+@mixin grid-row($gutter: $default-grid-gutter) {
+    margin-left: - $gutter;
+    margin-right: - $gutter;
+    @include clear(fix);
 }
-//= grid border
-@mixin grid-border($border-color: $default-border-color, $border-width: $default-border-width) {
-    padding-right: $default-grid-margin / 2 - $border-width;
-    margin-right: $default-grid-margin / 2;
-    border-right: $border-width $default-border-style $border-color;
-}
-
-//= grid colborder
-@mixin grid-colborder($border-color: $default-border-color, $border-width: $default-border-width) {
-    padding-right: floor(($default-grid-width + 2 * $default-grid-margin - $border-width) / 2);
-    margin-right: ceil(($default-grid-width + 2 * $default-grid-margin - $border-width) / 2);
-    border-right: $border-width $default-border-style $border-color;
+//= 栅格默认属性
+@mixin grid-column($gutter: $default-grid-gutter, $direction: left) {
+    @include float($direction);
+    margin-#{$direction}: $gutter;
 }
 
-//= base columns
-@mixin base-column($last: false){
-    @include float(left);
-    @if $last{
-        @include grid-last;
-    }@else{
-        margin-right:$default-grid-margin;
+@mixin grid-column-width($prefix: col, $column: 1, $span: $default-grid-span, $gutter: $default-grid-gutter) {
+    @if $prefix {
+        .#{$prefix}-#{$column} {
+            width: $span * $column - $gutter;
+            @content;
+        }
+    }
+    @else {
+        width: $span * $column - $gutter;
     }
 }
 
-//= columns
-@mixin column($n,$last: false){
-    @include base-column($last);
-    width: span($n);
+@mixin grid-column-offset($prefix: offset, $column: 1, $span: $default-grid-span, $gutter: $default-grid-gutter, $direction: left) {
+    @if $prefix {
+        .#{$prefix}-#{$column} {
+            margin-#{$direction}: $span * $column + $default-grid-gutter;
+            @content;
+        }
+    }
+    @else {
+        margin-#{$direction}: $span * $column + $default-grid-gutter;
+    }
 }
-
-//= columns border
-@mixin column-border($n,$border-color: $default-border-color, $border-width: $default-border-width){
-    @include float(left);
-    @include grid-border($border-color,$border-width);
-    width: span($n);
-}
-

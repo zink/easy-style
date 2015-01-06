@@ -3,18 +3,6 @@
 //default platform support: sc,pc,mb,adr,ios,adr2,adr4,ios5
 $default-platform : SC !default;
 
-//====grid system
-//grid columns
-$default-grid-columns : 24 !default;
-//grid width
-$default-grid-width : 30px !default;
-//grid margin
-$default-grid-margin : 10px !default;
-//grid outer width
-$default-grid-outer-width : $default-grid-width + $default-grid-margin!default;
-//page width
-$default-container-width : $default-grid-columns * $default-grid-outer-width - $default-grid-margin !default;
-
 //========跨浏览器初始化,定义是否进行跨浏览器支持
 $ex-support-for-mozilla   : true !default;  //FireFox
 $ex-support-for-webkit    : true !default;  //Webkit
@@ -169,3 +157,16 @@ $default-pro     : width;
 
 $default-item-class : item;
 $default-box-sizing : border-box;
+
+//====grid system
+//grid columns
+$default-grid-columns : 24 !default;
+//grid width
+$default-grid-span : 30px !default;
+//grid gutter
+$default-grid-gutter : 10px !default;
+//grid outer width
+$default-grid-outer-width : $default-grid-span + $default-grid-gutter !default;
+//page width
+$default-container-width : $default-grid-columns * $default-grid-outer-width - $default-grid-gutter !default;
+

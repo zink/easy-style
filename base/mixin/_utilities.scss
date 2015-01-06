@@ -233,7 +233,6 @@
         }
     }@else {
         margin-#{$direct}:0;
-        @content;
     }
 }
 

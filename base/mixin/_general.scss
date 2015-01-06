@@ -17,7 +17,7 @@
 @mixin clear($way: $default-clear){
     @if $way == fix{
         @if fix(7) {
-            *zoom:1;
+            *zoom: 1;
         }
         &:after {
             content: "\0020";

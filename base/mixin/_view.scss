@@ -7,9 +7,6 @@
 //= @param: $margin:外边距，默认为0 auto;
 //= @param: $class:是否带有class名，为true时默认命名container，并且可扩展;
 @mixin container($width: $default-container-width, $margin: 0, $class:false){
-    @if typeof($margin) == number {
-        $margin: $margin auto;
-    }
     @if $class {
         @if $class == true {
             $class: container;

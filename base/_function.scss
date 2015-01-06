@@ -13,13 +13,13 @@
         }
         @return $r;
     }
-    @if ($who == 6 or $who == ie6) and ($ex-support-for-ie6 or $ex-support-for-ie7 or $ex-support-for-ie8 or $ex-support-for-microsoft) and $default-platform != MB {
+    @if ($who == 6 or $who == ie6) and ($ex-support-for-ie6 or $ex-support-for-ie7) and $default-platform != MB {
         @return ie6;
     }
-    @if ($who == 7 or $who == ie7) and ($ex-support-for-ie7 or $ex-support-for-ie8 or $ex-support-for-microsoft) and $default-platform != MB {
+    @if ($who == 7 or $who == ie7) and ($ex-support-for-ie7) and $default-platform != MB {
         @return ie7;
     }
-    @if ($who == 8 or $who == ie8) and ($ex-support-for-ie8 or $ex-support-for-microsoft) and $default-platform != MB {
+    @if ($who == 8 or $who == ie8) and ($ex-support-for-ie8) and $default-platform != MB {
         @return ie8;
     }
     @if ($who == 9 or $who == ie9) and ($ex-support-for-ie9 or $ex-support-for-microsoft) and $default-platform != MB {
@@ -29,10 +29,10 @@
         @return ie10;
     }
     @if ($who == 11 or $who == ie11) and ($ex-support-for-ie11 or $ex-support-for-microsoft) {
-        @return ie10;
+        @return ie11;
     }
     @if ($who == 12 or $who == ie12) and ($ex-support-for-ie12 or $ex-support-for-microsoft) {
-        @return ie10;
+        @return ie12;
     }
     @if ($who == ie or $who == ms) and $ex-support-for-microsoft {
         @return ie;
@@ -276,8 +276,8 @@
     @return ($width $style $color);
 }
 //== css grid 跨度计算
-@function span($n:1){
-    @return $default-grid-width * $n + $default-grid-margin * ($n - 1);
+@function span($n:1, $width: $default-grid-span, $margin: $default-grid-gutter){
+    @return $width * $n + $margin * ($n - 1);
 }
 
 @function linear-gradient($angle, $details...) {
