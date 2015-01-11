@@ -87,16 +87,12 @@
         $imageheight: $height - $border-width * 2;
     }
     $fontsize: $height * 0.9;
-    @include box($width,$height,if(fix(ie7), if($imageheight, $imageheight - 2px, $height - 2px), null), $overflow,$border,$background, false, false, false, $height, if(fix(7), '*', null));
+    @include box($width,$height, if($imageheight, $imageheight - 2px, $height - 2px), $overflow,$border,$background, false, false, false, $height, if(fix(7), '*', null));
     @if $margin {
         @include margin($margin);
     }
     text-align:center;
-    @if not fix(7) {
-        display: table-cell;
-        vertical-align: middle;
-    }
-    @else {
+    @if fix(7) {
         *font-size:$fontsize;font-family:Arial;
     }
     @content;

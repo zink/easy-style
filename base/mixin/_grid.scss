@@ -9,10 +9,13 @@
     width: $width;
 }
 //= 栅格中的某行
-@mixin grid-row($gutter: $default-grid-gutter) {
-    margin-left: - $gutter;
-    margin-right: - $gutter;
+@mixin grid-row($class: col, $gutter: $default-grid-gutter) {
+    // margin-left: - $gutter;
+    // margin-right: - $gutter;
     @include clear(fix);
+    [class|="#{$class}"]:first-child {
+        margin-left: 0;
+    }
 }
 //= 栅格默认属性
 @mixin grid-column($gutter: $default-grid-gutter, $direction: left) {
@@ -35,11 +38,11 @@
 @mixin grid-column-offset($prefix: offset, $column: 1, $span: $default-grid-span, $gutter: $default-grid-gutter, $direction: left) {
     @if $prefix {
         .#{$prefix}-#{$column} {
-            margin-#{$direction}: $span * $column + $default-grid-gutter;
+            margin-#{$direction}: $span * $column;
             @content;
         }
     }
     @else {
-        margin-#{$direction}: $span * $column + $default-grid-gutter;
+        margin-#{$direction}: $span * $column;
     }
 }
