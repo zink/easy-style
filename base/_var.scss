@@ -131,12 +131,13 @@ $default-text-class : text !default;
 $default-form-class : form !default;
 
 //==========font属性
-$default-font-size       : 12px;
+$default-font-size-base  : 12px;
+$default-font-size       : 100%;
 $default-line-height     : 1.5;
-$default-font-family     : Lucida Grande, Lucida Sans Unicode, Tahoma, Helvetica, Arial,Hiragino Sans GB, sans-serif; // 为同时兼容xp和mac的字体效果，去除STXihei,SimSun
+$default-font-family     : Lucida Grande, Lucida Sans Unicode, Tahoma, Helvetica, Arial, Hiragino Sans GB, sans-serif; // 为同时兼容xp和mac的字体效果，去除STXihei,SimSun
 $default-ie7-font-family : Tahoma, Arial, SimSun, sans-serif; //vista, xp下ie6/7下默认字体
 $default-hx-font-family  : Microsoft YaHei, STHeiti, sans-serif;
-$default-body-font       : #{$default-font-size}/#{$default-line-height} $default-font-family;
+$default-body-font       : #{$default-font-size-base}/#{$default-line-height} $default-font-family;
 $default-color           : $g3;
 $default-link-color      : blue;
 $default-hover-color     : adjust-color($default-link-color, $blue:-10);

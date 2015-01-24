@@ -158,18 +158,18 @@
     }
     @if fix(pc) and $hack == true and typeof($value) == number {
         @if unit($value) == px or $value == 0 {
-            @if $value < $default-font-size {
+            @if $value < $default-font-size-base {
                 @if not $line {
                     line-height: $height;
                 }
-                font-size: $value*0.875;
+                font-size: $value * 0.875;
             }
         }@else if unit($value) == em {
             @if $value < 1em {
                 @if not $line {
                     line-height: $height;
                 }
-                font-size: $value*0.875;
+                font-size: $value * 0.875;
             }
         }
     }
@@ -180,7 +180,7 @@
 //= @param: $width:默认边框宽1px;为(left/right/top/bottom)任一值或多个值，则单独生成某条边的样式;为空或false单独生成style及color;为no-xxx并且$color为列表值时就不生成某条边框样式;
 //= @param: $style:默认边框样式solid;为空或false单独生成width和color;
 //= @param: 三个参数均不传时生成默认的边框样式，同理传其中一个或两个参数时剩下的均为默认值;但是如果$color传两个值，就会分别单独生成对应的border属性。
-@mixin border($color:$default-border-color, $width:$default-border-width, $style:$default-border-style){
+@mixin border($color: $default-border-color, $width: $default-border-width, $style: $default-border-style){
     @if chk($color) {
         @if typeof($color) == color {
             @if typeof($width) == number {
