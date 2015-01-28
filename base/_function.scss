@@ -276,37 +276,46 @@
     @return ($width $style $color);
 }
 //== css grid 跨度计算
-@function span($n:1, $width: $default-grid-span, $margin: $default-grid-gutter){
-    @return $width * $n + $margin * ($n - 1);
+@function span($columns: 1, $width: $default-grid-col, $gutter: $default-grid-gutter) {
+    @if $columns == 1 {
+        @return $width;
+    }
+    @else {
+        @return $width * $columns + $gutter * ($columns - 1);
+    }
+}
+//== css grid 偏移量计算
+@function span-outer($columns: 1, $width: $default-gird-col, $gutter: $default-grid-gutter) {
+    @return $width * $columns + $gutter * $columns;
 }
 
 @function linear-gradient($angle, $details...) {
-  $legacy-syntax: $ex-support-for-owg;
+    $legacy-syntax: $ex-support-for-owg;
 
-  @if type-of($angle) != 'number' {
-    $angle: compact($angle);
-    $legacy-syntax: if(index($angle, 'to'), false, true);
-  }
+    @if type-of($angle) != 'number' {
+        $angle: compact($angle);
+        $legacy-syntax: if(index($angle, 'to'), false, true);
+    }
 
-  @if $legacy-syntax {
-    @return _linear-gradient_legacy($angle, $details...);
-  } @else {
-    @return _linear-gradient($angle, $details...);
-  }
+    @if $legacy-syntax {
+        @return _linear-gradient_legacy($angle, $details...);
+    } @else {
+        @return _linear-gradient($angle, $details...);
+    }
 }
 
 @function radial-gradient($angle, $details...) {
-  $legacy-syntax: $ex-support-for-owg;
+    $legacy-syntax: $ex-support-for-owg;
 
-  @if type-of($angle) != 'number' {
-    $angle: compact($angle);
-    $legacy-syntax: if(index($angle, 'to'), false, true);
-  }
+    @if type-of($angle) != 'number' {
+        $angle: compact($angle);
+        $legacy-syntax: if(index($angle, 'to'), false, true);
+    }
 
-  @if $legacy-syntax {
-    @return _radial-gradient_legacy($angle, $details...);
-  } @else {
-    @return _radial-gradient($angle, $details...);
-  }
+    @if $legacy-syntax {
+        @return _radial-gradient_legacy($angle, $details...);
+    } @else {
+        @return _radial-gradient($angle, $details...);
+    }
 }
 

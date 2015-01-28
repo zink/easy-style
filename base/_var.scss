@@ -72,14 +72,14 @@ $f9 : #F9F9F9;
 $fc : #FCFCFC;
 $fe : #FEFEFE;
 //三位简写色值
-$f30: #FF3300;
-$f60: #FF6600;
-$ff9: #FFFF99;
-$ffc: #FFFFCC;
-$c00: #CC0000;
-$f90: #FF9900;
-$f00: #FF0000;
-$ff0: #FFFF00;
+$f30 : #FF3300;
+$f60 : #FF6600;
+$ff9 : #FFFF99;
+$ffc : #FFFFCC;
+$c00 : #CC0000;
+$f90 : #FF9900;
+$f00 : #FF0000;
+$ff0 : #FFFF00;
 $_006: #000066;
 $_009: #000099;
 $_060: #006600;
@@ -96,77 +96,72 @@ $_7b0: #77BB00;
 
 
 //==========border 默认值
-$default-border-width     : 1px;
-$default-border-style     : solid;
-$default-border-color     : $gc;
-$default-border           : $default-border-width $default-border-style $default-border-color;
-$default-border-radius    : 3px;
+$default-border-width     : 1px !default;
+$default-border-style     : solid !default;
+$default-border-color     : $gc !default;
+$default-border           : $default-border-width $default-border-style $default-border-color !default;
+$default-border-radius    : 3px !default;
 
 //==========box shadow默认值
-$default-box-shadow          : 1px 1px 1px $gc;
-$default-box-shadow-h-offset : 0;
-$default-box-shadow-v-offset : 0;
-$default-box-shadow-blur     : 5px;
-$default-box-shadow-color    : $gc;
-$default-box-shadow-spread   : false;
-$default-box-shadow-inset    : false;
+$default-box-shadow          : 1px 1px 1px $gc !default;
+$default-box-shadow-h-offset : 0 !default;
+$default-box-shadow-v-offset : 0 !default;
+$default-box-shadow-blur     : 5px !default;
+$default-box-shadow-color    : $gc !default;
+$default-box-shadow-spread   : false !default;
+$default-box-shadow-inset    : false !default;
 
 //==========box默认值
-$default-overflow    : hidden;
-$default-box-size    : 100%;
-$default-padding     : 1px;
-$default-margin      : 1px;
-$default-clear       : both;
-$default-width       : 100%;
-$default-position    : relative;
-$default-direct      : left;
-$default-direction   : top right bottom left;
-$default-line-height : 1.5;
-$default-background  : $ge;
+$default-overflow    : hidden !default;
+$default-box-size    : 100% !default;
+$default-padding     : 1px !default;
+$default-margin      : 1px !default;
+$default-clear       : both !default;
+$default-width       : 100% !default;
+$default-position    : relative !default;
+$default-direct      : left !default;
+$default-direction   : top right bottom left !default;
+$default-line-height : 1.5 !default;
+$default-background  : $ge !default;
 
 //==========form默认值
 $default-text-class : text !default;
 $default-form-class : form !default;
 
 //==========font属性
-$default-font-size-base  : 12px;
-$default-font-size       : 100%;
-$default-line-height     : 1.5;
-$default-line-height-base: $default-font-size-base * $default-line-height;
-$default-font-family     : Lucida Grande, Lucida Sans Unicode, Tahoma, Helvetica, Arial, Hiragino Sans GB, sans-serif; // 为同时兼容xp和mac的字体效果，去除STXihei,SimSun
-$default-ie7-font-family : Tahoma, Arial, SimSun, sans-serif; //vista, xp下ie6/7下默认字体
-$default-hx-font-family  : Microsoft YaHei, STHeiti, sans-serif;
-$default-body-font       : #{$default-font-size-base}/#{$default-line-height} $default-font-family;
-$default-color           : $g3;
-$default-link-color      : blue;
-$default-hover-color     : adjust-color($default-link-color, $blue:-10);
+$default-font-size-base  : 12px !default;
+$default-font-size       : 100% !default;
+$default-line-height     : 1.5 !default;
+$default-line-height-base: $default-font-size-base * $default-line-height !default;
+$default-font-family     : Lucida Grande, Lucida Sans Unicode, Tahoma, Helvetica, Arial, Hiragino Sans GB, sans-serif !default; // 为同时兼容xp和mac的字体效果，去除STXihei,SimSun
+$default-ie7-font-family : Tahoma, Arial, SimSun, sans-serif !default; //vista, xp下ie6/7下默认字体
+$default-hx-font-family  : Microsoft YaHei, STHeiti, sans-serif !default;
+$default-body-font       : #{$default-font-size-base}/#{$default-line-height} $default-font-family !default;
+$default-color           : $g3 !default;
+$default-link-color      : blue !default;
+$default-hover-color     : adjust-color($default-link-color, $blue:-10) !default;
 
-$default-text-align      : center;
-$default-text-decoration : none;
-$default-text-indent     : 0;
-$default-white-space     : nowrap;
-$default-text-transform  : none;
-$default-letter-spacing  : normal;
-$default-word-spacing    : normal;
+$default-text-align      : center !default;
+$default-text-decoration : none !default;
+$default-text-indent     : 0 !default;
+$default-white-space     : nowrap !default;
+$default-text-transform  : none !default;
+$default-letter-spacing  : normal !default;
+$default-word-spacing    : normal !default;
 
-$default-scale   : 1;
-$default-deg     : 90deg;
-$default-time    : 500ms;
-$default-eff     : ease-in;
-$default-pro     : width;
+$default-scale   : 1 !default;
+$default-deg     : 90deg !default;
+$default-time    : 500ms !default;
+$default-eff     : ease-in !default;
+$default-pro     : width !default;
 
-$default-item-class : item;
-$default-box-sizing : border-box;
+$default-item-class : item !default;
+$default-box-sizing : border-box !default;
 
 //====grid system
-//grid columns
-$default-grid-columns : 24 !default;
-//grid width
-$default-grid-span : 30px !default;
-//grid gutter
-$default-grid-gutter : 10px !default;
-//grid outer width
-$default-grid-outer-width : $default-grid-span + $default-grid-gutter !default;
-//page width
-$default-container-width : $default-grid-columns * $default-grid-outer-width - $default-grid-gutter !default;
+$default-grid-columns     : 24 !default;
+$default-grid-col         : 30px !default;
+$default-grid-gutter      : 10px !default;
+$default-grid-span        : $default-grid-col + $default-grid-gutter !default;
+$default-container-width  : $default-grid-columns * $default-grid-span - $default-grid-gutter !default;
 

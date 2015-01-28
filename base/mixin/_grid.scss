@@ -23,26 +23,26 @@
     margin-#{$direction}: $gutter;
 }
 
-@mixin grid-column-width($prefix: col, $column: 1, $span: $default-grid-span, $gutter: $default-grid-gutter) {
+@mixin grid-column-width($prefix: col, $columns: 1, $width: $default-grid-col, $gutter: $default-grid-gutter) {
     @if $prefix {
-        .#{$prefix}-#{$column} {
-            width: $span * $column - $gutter;
+        .#{$prefix}-#{$columns} {
+            width: span($columns, $width, $gutter);
             @content;
         }
     }
     @else {
-        width: $span * $column - $gutter;
+        width: span($columns, $width, $gutter);
     }
 }
 
-@mixin grid-column-offset($prefix: offset, $column: 1, $span: $default-grid-span, $gutter: $default-grid-gutter, $direction: left) {
+@mixin grid-column-offset($prefix: offset, $columns: 1, $width: $default-grid-col, $gutter: $default-grid-gutter, $direction: left) {
     @if $prefix {
-        .#{$prefix}-#{$column} {
-            margin-#{$direction}: $span * $column;
+        .#{$prefix}-#{$columns} {
+            margin-#{$direction}: span-outer($columns, $width, $gutter);
             @content;
         }
     }
     @else {
-        margin-#{$direction}: $span * $column;
+        margin-#{$direction}: span-outer($columns, $width, $gutter);
     }
 }
