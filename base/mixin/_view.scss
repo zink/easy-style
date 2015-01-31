@@ -174,7 +174,7 @@
     @if chk($background) {
         @include background($background);
     }
-    @if $overflow != false {
+    @if $overflow {
         @include overflow($overflow);
     }
 }
