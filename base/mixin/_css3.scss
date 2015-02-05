@@ -105,8 +105,8 @@
 }
 
 //= css3 transition
-@mixin transition($pro: $default-pro, $time: $default-time, $eff: $default-eff){
-    @include cross-browser(transition, $pro $time $eff);
+@mixin transition($value...){
+    @include cross-browser(transition, $value);
 }
 @mixin transition-timing-function($eff: $default-eff) {
     @include cross-browser(transition-timing-function, $eff);
@@ -173,9 +173,23 @@
 @mixin text-size-adjust($value:none) {
     @include cross-browser(text-size-adjust, $value, $o:false, $ms:true);
 }
+
 @mixin animation($value...) {
-    @include cross-browser(animation, $value...);
+    @include cross-browser(animation, $value);
 }
+
+@mixin animation-duration($value) {
+    @include cross-browser(animation-duration, $value);
+}
+
+@mixin animation-fill-mode($value) {
+    @include cross-browser(animation-fill-mode, $value);
+}
+
+@mixin animation-name($value) {
+    @include cross-browser(animation-name, $value);
+}
+
 @mixin calc($prop, $value) {
     @if fix(webkit) {
         #{$prop}: -webkit-calc(#{$value});
@@ -216,3 +230,32 @@
 @mixin fade($name, $from:null, $to:null) {
     @include keyframe($name, opacity, $from, $to);
 }
+
+// @mixin keyframes($name, $deprecated-prefixes...) {
+    // $warned: warn-about-useless-prefix-arguments($deprecated-prefixes...);
+//     @include with-each-prefix(css-animation, $animation-support-threshold) {
+//         @if fix(moz) {
+//             @-moz-keyframes #{$name} {
+//                 @content;
+//             }
+//         }
+//         @if fix(webkit) {
+//             @-webkit-keyframes #{$name} {
+//                 @content;
+//             }
+//         }
+//         @if fix(o) {
+//             @-o-keyframes #{$name} {
+//                 @content;
+//             }
+//         }
+//         @if fix(ms) {
+//             @-ms-keyframes #{$name} {
+//                 @content;
+//             }
+//         }
+//         @keyframes #{$name} {
+//             @content;
+//         }
+//     }
+// }
