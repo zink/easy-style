@@ -1,10 +1,13 @@
-﻿@mixin fx_fade($namespace:emb){
-  ##{$namespace} .fade.in {
+﻿@mixin fx_fade($namespace:null){
+  #{$namespace} .fade.in {
     -webkit-animation-name: fadeIn;
+    visibility: visible;
   }
 
-  ##{$namespace} .fade.out {
+  #{$namespace} .fade.out {
     -webkit-animation-name: fadeOut;
+    @include opacity(0);
+    visibility: hidden;
   }
 
   @-webkit-keyframes fadeIn {
