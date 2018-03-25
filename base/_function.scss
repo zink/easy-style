@@ -163,7 +163,7 @@
     @if typeof($value) == list {
         @each $v in $value {
             @if chk($v) {
-                $str: if($str == null, $v, $str#{unquote($seq)}$v);
+                $str: if($str == null, $v, unquote("#{$str}#{$seq}#{$v}"));
             }
         }
     }@else {

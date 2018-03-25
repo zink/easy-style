@@ -197,7 +197,7 @@
                 @else if index(no-top no-right no-bottom no-left, $width) {
                     $color: border-value($color);
                     @each $v in $default-direction {
-                        @if $width != no-#{$v} {
+                        @if $width != unquote("no-#{$v}") {
                             border-#{$v}: $color;
                         }
                     }
@@ -281,7 +281,7 @@
                     @for $i from 1 through 4 {
                         $d: nth($default-direction, $i);
                         $index: 5;
-                        @if $width != no-#{$d} {
+                        @if $width != unquote("no-#{$d}") {
                             @if $i <= $len {
                                 @if $i > $index {
                                     $i: $i - 1;

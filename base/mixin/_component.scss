@@ -191,7 +191,7 @@
         @if not $nopos {
             #{$direct}: - $size * 2;
         }
-        $val: 50% - #{$size};
+        $val: unquote("50% - #{$size}");
         @include calc($d, $val);
         z-index:2;
         width: 0;
@@ -216,7 +216,7 @@
                 #{$d}: $bgsize;
             }
             @else {
-                $val: 50% - #{$bgsize};
+                $val: unquote("50% - #{$bgsize}");
                 @include calc($d, $val);
                 // #{$d}: calc();
             }

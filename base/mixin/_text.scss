@@ -4,16 +4,16 @@
 
 //= 基本字体属性size,family,style,weight,color,line-height etc.
 @mixin font($value:$default-color, $merge:true){
-    @if typeof($value) == color{
-        color: unquote($value);
-    }@else if typeof($value) == number{
-        font-size: unquote($value);
+    @if typeof($value) == color {
+        color: $value;
+    }@else if typeof($value) == number {
+        font-size: $value;
     }@else if typeof($value) == list {
         @if length($value) == 2 and typeof(nth($value, 1)) == number and typeof(nth($value, 2)) == number {
             font-size: nth($value, 1);
             line-height: nth($value, 2);
         }@else if $merge == true {
-            font: unquote($value);
+            font: $value;
         }@else if typeof($merge) == list {
         $i: 1;
             @each $v in $merge {
@@ -32,12 +32,12 @@
             }
         }@else {
             $lf: if($merge == height, line, font);
-            #{splice($lf $merge)}: unquote($value);
+            #{splice($lf $merge)}: $value;
         }
     }
 }
 
-//= 基本文本属性aligh,overflow,white-space,decoration,indent,shadow,transform,letter/word-spacing,direction
+//= 基本文本属性align,overflow,white-space,decoration,indent,shadow,transform,letter/word-spacing,direction
 @mixin text($align:$default-text-align, $overflow:false, $space:false, $decoration:false, $indent:false, $shadow: false, $transform:false, $letter:false, $word:false, $direction:false){
     @if $overflow {
         white-space: nowrap;
